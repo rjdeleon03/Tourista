@@ -3,4 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="currency_base">Base Currency</string>
+    <string name="currency_target">Target Currency</string>
+    <string name="currency_target_amount">Target Currency Amount</string>
+    <string name="currency_base_amount">Base Currency Amount</string>
+    <string name="currency_convert">Convert</string>
 </resources>
