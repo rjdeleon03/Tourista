@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 
 /**
  * A simple [Fragment] subclass.
@@ -28,13 +29,19 @@ class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
     }
 
     private lateinit var mViewMvc: CurrencyConverterMvcImpl
+    private lateinit var mViewModel: CurrencyConverterViewModelImpl
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(this).get(CurrencyConverterViewModelImpl::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        mViewMvc = CurrencyConverterMvcImpl(inflater, container)
+        mViewMvc = CurrencyConverterMvcImpl(inflater, container, mViewModel)
         mViewMvc.registerListener(this)
         return mViewMvc.rootView
     }

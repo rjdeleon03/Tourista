@@ -8,9 +8,10 @@ import android.widget.ImageButton
 import com.pabsdl.tourista.R
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
 
-class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
+class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, viewModel: CurrencyConverterViewModel) :
     BaseObservableViewMvc<CurrencyConverterMvc.Listener>(), CurrencyConverterMvc {
 
+    private val mViewModel = viewModel
     override val mRootView: View = inflater.inflate(R.layout.fragment_currency_converter, parent, false)
 
     init {
