@@ -7,24 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import com.pabsdl.tourista.R
-
 /**
  * A simple [Fragment] subclass.
  * Use the [CurrencyConverterFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CurrencyConverterFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_currency_converter, container, false)
-    }
-
+class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
 
     companion object {
         /**
@@ -36,5 +25,30 @@ class CurrencyConverterFragment : Fragment() {
         @JvmStatic
         fun newInstance() =
             CurrencyConverterFragment()
+    }
+
+    private lateinit var mViewMvc: CurrencyConverterMvcImpl
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        mViewMvc = CurrencyConverterMvcImpl(inflater, container)
+        mViewMvc.registerListener(this)
+        return mViewMvc.rootView
+    }
+
+    override fun onDestroyView() {
+        mViewMvc.unregisterListener(this)
+        super.onDestroyView()
+    }
+
+    override fun onConvertClicked() {
+        // TODO: Handle convert button click
+    }
+
+    override fun onSwapCurrencyClicked() {
+        // TODO: Handle swap currency button click
     }
 }
