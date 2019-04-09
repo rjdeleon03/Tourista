@@ -6,26 +6,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import com.pabsdl.tourista.R
+import com.pabsdl.tourista.common.base.BaseObservableViewMvc
 
-class CurrencyConverterMvcImpl(inflater: LayoutInflater,
-                               parent: ViewGroup?) : CurrencyConverterMvc {
+class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
+    BaseObservableViewMvc<CurrencyConverterMvc.Listener>(), CurrencyConverterMvc {
 
-    private val mListeners = ArrayList<CurrencyConverterMvc.Listener>()
-
-    private val mRootView: View = inflater.inflate(R.layout.fragment_currency_converter, parent, false)
-
-    override fun <T : View?> findViewById(id: Int) = rootView.findViewById<T>(id)
+    override val mRootView: View = inflater.inflate(R.layout.fragment_currency_converter, parent, false)
 
     init {
         val convertButton = findViewById<Button>(R.id.currencyConvertButton)
-        convertButton?.setOnClickListener {
+        convertButton.setOnClickListener {
             for(listener in mListeners) {
                 listener.onConvertClicked()
             }
         }
 
         val swapButton = findViewById<ImageButton>(R.id.currencySwapButton)
-        swapButton?.setOnClickListener {
+        swapButton.setOnClickListener {
             for(listener in mListeners) {
                 listener.onSwapCurrencyClicked()
             }
@@ -34,13 +31,5 @@ class CurrencyConverterMvcImpl(inflater: LayoutInflater,
 
     override val rootView: View
         get() { return mRootView }
-
-    override fun registerListener(listener: CurrencyConverterMvc.Listener) {
-        mListeners.add(listener)
-    }
-
-    override fun unregisterListener(listener: CurrencyConverterMvc.Listener) {
-        mListeners.remove(listener)
-    }
 
 }

@@ -1,16 +1,11 @@
 package com.pabsdl.tourista.feature.currencyconverter
 
-import android.view.View
+import com.pabsdl.tourista.common.base.BaseListener
 
 interface CurrencyConverterMvc {
-    val rootView: View
 
-    interface Listener {
+    interface Listener: BaseListener {
         fun onConvertClicked()
         fun onSwapCurrencyClicked()
     }
-
-    fun <T : View?> findViewById(id: Int): T
-    fun registerListener(listener: Listener)
-    fun unregisterListener(listener: Listener)
 }
