@@ -10,4 +10,5 @@
         android:name="com.pabsdl.tourista.feature.currencyconverter.CurrencyConverterFragment"
         android:label="fragment_currency_converter"
         tools:layout="@layout/fragment_currency_converter" />
+
 </navigation>
