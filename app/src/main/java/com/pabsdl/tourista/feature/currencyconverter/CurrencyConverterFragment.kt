@@ -6,7 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+import com.pabsdl.tourista.network.CurrencyRetrofitFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass.
@@ -53,6 +59,21 @@ class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
 
     override fun onConvertClicked() {
         // TODO: Handle convert button click
+        val service = CurrencyRetrofitFactory.getService()
+        CoroutineScope(Dispatchers.IO).launch {
+            val request = service.getConversionRate()
+            withContext(Dispatchers.Main) {
+                try {
+                    val response = request.await()
+                    val res = response.body()?.get("rates")?.asJsonObject?.get("USDPHP")?.asJsonObject?.get("rate")?.asFloat!!
+
+                    Toast.makeText(context, (res * 1000).toString(), Toast.LENGTH_LONG).show()
+                } catch (ex: Exception) {
+                    ex.printStackTrace()
+                }
+            }
+        }
+        val xy = 1
     }
 
     override fun onSwapCurrencyClicked() {
