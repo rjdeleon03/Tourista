@@ -5,4 +5,8 @@ import androidx.lifecycle.MutableLiveData
 
 interface CurrencyConverterViewModel {
     fun getBaseAmount(): MutableLiveData<Float>
+
+    fun getTargetAmount(): LiveData<Float>
+
+    fun getConversionRate()
 }

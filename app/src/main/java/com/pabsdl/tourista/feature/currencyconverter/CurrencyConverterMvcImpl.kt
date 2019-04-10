@@ -3,27 +3,30 @@ package com.pabsdl.tourista.feature.currencyconverter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import com.pabsdl.tourista.R
+import androidx.lifecycle.LifecycleOwner
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
+import com.pabsdl.tourista.databinding.FragmentCurrencyConverterBinding
+import java.lang.ref.WeakReference
 
-class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?, viewModel: CurrencyConverterViewModel) :
+class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
+                               viewModel: CurrencyConverterViewModel, lifecycleOwner: LifecycleOwner) :
     BaseObservableViewMvc<CurrencyConverterMvc.Listener>(), CurrencyConverterMvc {
 
+    private val mLifecycleOwner = WeakReference<LifecycleOwner>(lifecycleOwner)
     private val mViewModel = viewModel
-    override val mRootView: View = inflater.inflate(R.layout.fragment_currency_converter, parent, false)
+    private val mDataBinding = FragmentCurrencyConverterBinding.inflate(inflater, parent, false)
+    override val mRootView: View = mDataBinding.root
 
     init {
-        val convertButton = findViewById<Button>(R.id.currencyConvertButton)
-        convertButton.setOnClickListener {
+        mDataBinding.viewModel = mViewModel
+        mDataBinding.lifecycleOwner = mLifecycleOwner.get()
+        mDataBinding.currencyConvertButton.setOnClickListener {
             for(listener in mListeners) {
                 listener.onConvertClicked()
             }
         }
 
-        val swapButton = findViewById<ImageButton>(R.id.currencySwapButton)
-        swapButton.setOnClickListener {
+        mDataBinding.currencySwapButton.setOnClickListener {
             for(listener in mListeners) {
                 listener.onSwapCurrencyClicked()
             }
