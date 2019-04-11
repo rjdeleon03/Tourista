@@ -10,7 +10,9 @@ fun setFloatToText(et: TextInputEditText, f: Float?) {
         et.setText(0f.toString())
         return
     }
-    et.setText(String.format("%.2f", f))
+
+    if (f.toString() != et.text.toString())
+        et.setText(String.format("%.2f", f))
 }
 
 @InverseBindingAdapter(attribute = "android:text",
