@@ -9,4 +9,9 @@
         <item name="android:fontFamily">@font/raleway_semibold</item>
     </style>
 
+    <style name="TextInputDarkerAccentTheme"
+        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="colorAccent">@color/colorAccentDark</item>
+    </style>
+
 </resources>
