@@ -23,7 +23,9 @@ class CurrencyConversionData: BaseObservable() {
         @Bindable get() = _baseAmount
         set(value) {
             if (_baseAmount != value) {
-                notifyPropertyChanged(BR.baseAmount)
+                if (_baseAmount == 0f || value == 0f) {
+                    notifyPropertyChanged(BR.baseAmount)
+                }
                 _baseAmount = value
             }
         }
