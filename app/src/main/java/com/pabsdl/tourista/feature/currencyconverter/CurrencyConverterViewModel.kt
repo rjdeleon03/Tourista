@@ -1,12 +1,10 @@
 package com.pabsdl.tourista.feature.currencyconverter
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.pabsdl.tourista.model.CurrencyConversionData
 
 interface CurrencyConverterViewModel {
-    fun getBaseAmount(): MutableLiveData<Float>
-
-    fun getTargetAmount(): LiveData<Float>
+    fun getConversionData(): MutableLiveData<CurrencyConversionData>
 
     fun getConversionRate()
 }

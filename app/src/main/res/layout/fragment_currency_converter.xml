@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     android:hint="@string/currency_base_amount"
-                    android:text="@={viewModel.baseAmount}"/>
+                    android:text="@={viewModel.conversionData.baseAmount}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/currency_target_amount"
                     android:enabled="false"
-                    android:text="@{viewModel.targetAmount}" />
+                    android:text="@{viewModel.conversionData.targetAmount}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

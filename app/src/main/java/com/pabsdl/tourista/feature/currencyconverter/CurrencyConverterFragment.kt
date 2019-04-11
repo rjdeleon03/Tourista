@@ -58,7 +58,6 @@ class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
     }
 
     override fun onConvertClicked() {
-        // TODO: Handle convert button click
         mViewModel.getConversionRate()
     }
 
