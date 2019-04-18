@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object CurrencyRetrofitFactory {
 
-    const val BASE_URL = "https://www.freeforexapi.com/"
+    const val BASE_URL = "https://currency-exchange.p.rapidapi.com/"
     private var INSTANCE: CurrencyRetrofitService? = null
 
     @JvmStatic

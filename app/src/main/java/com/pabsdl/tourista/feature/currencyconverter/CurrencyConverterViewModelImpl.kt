@@ -21,8 +21,6 @@ class CurrencyConverterViewModelImpl(application: Application):
         mConversionData.setValue(CurrencyConversionData())
     }
 
-    private fun conversionDataValue() = mConversionData.value!!
-
     override fun getConversionData() = mConversionData
 
     override fun getConversionRate() {
@@ -32,7 +30,7 @@ class CurrencyConverterViewModelImpl(application: Application):
             withContext(Dispatchers.Main) {
                 try {
                     val response = request.await()
-                    val rate = response.body()?.get("rates")?.asJsonObject?.get("USDPHP")?.asJsonObject?.get("rate")?.asFloat!!
+                    val rate = response.body()!!.asFloat
                     mConversionData.value?.setRateAndUpdateTargetAmount(rate)
                 } catch (ex: Exception) {
                     ex.printStackTrace()
