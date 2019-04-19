@@ -8,4 +8,6 @@
     <string name="currency_target_amount">Target Currency Amount</string>
     <string name="currency_base_amount">Base Currency Amount</string>
     <string name="currency_convert">Convert</string>
+    <string name="menu_currency_conversion">Currency Conversion</string>
+    <string name="menu_visa_information">Visa Information</string>
 </resources>

@@ -8,7 +8,12 @@
     <fragment
         android:id="@+id/currencyConverterFragment"
         android:name="com.pabsdl.tourista.feature.currencyconverter.CurrencyConverterFragment"
-        android:label="fragment_currency_converter"
+        android:label="@string/menu_currency_conversion"
         tools:layout="@layout/fragment_currency_converter" />
+    <fragment
+        android:id="@+id/visaInformationFragment"
+        android:name="com.pabsdl.tourista.feature.visainformation.VisaInformationFragment"
+        android:label="@string/menu_visa_information"
+        tools:layout="@layout/fragment_visa_information" />
 
 </navigation>
