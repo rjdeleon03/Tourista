@@ -60,4 +60,8 @@ dependencies {
 
     // Gson
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    // Room
+    implementation 'androidx.room:room-runtime:2.0.0'
+    annotationProcessor 'androidx.room:room-compiler:2.0.0'
 }
