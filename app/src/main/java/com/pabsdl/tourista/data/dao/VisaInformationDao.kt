@@ -5,15 +5,24 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.pabsdl.tourista.data.entities.VisaCountry
 import com.pabsdl.tourista.data.entities.VisaInformation
 
 @Dao
 interface VisaInformationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(visaInformation: VisaInformation)
+    fun insert(visaInformation: List<VisaInformation>)
 
-    @Query("SELECT * FROM visa_country WHERE country LIKE :country")
-    fun get(country: String) : LiveData<VisaCountry>
+    @Query("SELECT COUNT(*) FROM visa_information")
+    fun count(): Int
+
+    @Query("SELECT * FROM visa_information WHERE " +
+            "src_country LIKE :srcCountry AND dest_country LIKE :destCountry")
+    fun get(srcCountry: String, destCountry: String): LiveData<List<VisaInformation>>
+
+    @Query("SELECT DISTINCT src_country FROM visa_information")
+    fun getCountries(): LiveData<List<String>>
+
+    @Query("DELETE FROM visa_information")
+    fun clear()
 }
