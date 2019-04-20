@@ -63,8 +63,10 @@ class MainActivity : AppCompatActivity() {
                 it.isChecked = true
                 when (it.itemId) {
                     R.id.menuCurrencyConversion -> {
+                        mNavController.navigate(R.id.action_to_currencyConverterFragment)
                     }
                     R.id.menuVisaInformation -> {
+                        mNavController.navigate(R.id.action_to_visaInformationFragment)
                     }
                 }
             }

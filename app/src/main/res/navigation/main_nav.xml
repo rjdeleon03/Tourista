@@ -14,6 +14,15 @@
         android:id="@+id/visaInformationFragment"
         android:name="com.pabsdl.tourista.feature.visainformation.VisaInformationFragment"
         android:label="@string/menu_visa_information"
-        tools:layout="@layout/fragment_visa_information" />
+        tools:layout="@layout/fragment_visa_information" >
+    </fragment>
+
+    <action
+        android:id="@+id/action_to_currencyConverterFragment"
+        app:destination="@id/currencyConverterFragment" />
+
+    <action
+        android:id="@+id/action_to_visaInformationFragment"
+        app:destination="@id/visaInformationFragment" />
 
 </navigation>
