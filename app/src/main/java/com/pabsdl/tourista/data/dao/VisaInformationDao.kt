@@ -18,7 +18,7 @@ interface VisaInformationDao {
 
     @Query("SELECT * FROM visa_information WHERE " +
             "src_country LIKE :srcCountry AND dest_country LIKE :destCountry")
-    fun get(srcCountry: String, destCountry: String): LiveData<List<VisaInformation>>
+    fun get(srcCountry: String, destCountry: String): LiveData<VisaInformation>
 
     @Query("SELECT DISTINCT src_country FROM visa_information " +
             "WHERE src_country LIKE :srcCountry")

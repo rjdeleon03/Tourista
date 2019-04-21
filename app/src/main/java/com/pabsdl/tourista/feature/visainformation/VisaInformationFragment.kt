@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.pabsdl.tourista.Constants
 
@@ -39,6 +40,11 @@ class VisaInformationFragment : Fragment() {
         val binding = FragmentVisaInformationBinding.inflate(inflater, container, false)
         binding.viewModel = mViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        mViewModel.getVisaInfo().observe(this, Observer {
+            val x = 5
+        })
+
         return binding.root
     }
 
@@ -52,6 +58,7 @@ class VisaInformationFragment : Fragment() {
             if (hasFocus) displayVisaCountriesFragment(view.visaDestinationText.text.toString(),
                 Constants.VISA_COUNTRY_REQ_DESTINATION_CODE)
         }
+        visaSearchButton.setOnClickListener { mViewModel.searchVisaInfo() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

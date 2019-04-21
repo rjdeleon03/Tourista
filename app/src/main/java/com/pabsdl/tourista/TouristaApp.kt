@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.pabsdl.tourista.data.AppDatabase
 import com.pabsdl.tourista.data.entities.VisaInformation
-import com.pabsdl.tourista.model.VisaInformationData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

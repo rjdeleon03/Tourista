@@ -12,4 +12,5 @@
     <string name="menu_visa_information">Visa Information</string>
     <string name="visa_passport">Passport</string>
     <string name="visa_destination">Destination</string>
+    <string name="visa_search">Search for a country</string>
 </resources>
