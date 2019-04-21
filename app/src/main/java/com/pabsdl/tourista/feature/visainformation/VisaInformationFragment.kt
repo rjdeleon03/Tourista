@@ -6,11 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 import com.pabsdl.tourista.R
+import com.pabsdl.tourista.feature.visacountriesdialog.VisaCountriesFragment
 import kotlinx.android.synthetic.main.fragment_visa_information.*
+import kotlinx.android.synthetic.main.fragment_visa_information.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -32,21 +33,26 @@ class VisaInformationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_visa_information, container, false)
+        val view = inflater.inflate(R.layout.fragment_visa_information, container, false)
+        view.visaPassportText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) displayVisaCountriesFragment(view.visaPassportText.text.toString())
+        }
+        view.visaDestinationText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) displayVisaCountriesFragment(view.visaDestinationText.text.toString())
+        }
+
+        return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        mViewModel.getCountries().observe(this, Observer {
-        })
-
-        visaSearchButton.setOnClickListener {
-            mViewModel.searchCountries(visaPassportText.text.toString())
-        }
+    private fun displayVisaCountriesFragment(country: String) {
+        val dialog = VisaCountriesFragment.newInstance(country)
+        dialog.show(childFragmentManager, VISA_COUNTRIES_FRAGMENT_KEY)
     }
 
     companion object {
+
+        private const val VISA_COUNTRIES_FRAGMENT_KEY = "VISA_COUNTRIES_FRAGMENT_KEY"
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

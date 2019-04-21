@@ -5,10 +5,4 @@ import androidx.lifecycle.AndroidViewModel
 
 class VisaInformationViewModel(application: Application) :
     AndroidViewModel(application) {
-
-    private val mRepository = VisaInformationRepository(application)
-
-    fun getCountries() = mRepository.getCountries()
-
-    fun searchCountries(country: String) = mRepository.searchCountries(country)
 }
