@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 import com.pabsdl.tourista.R
+import com.pabsdl.tourista.utils.UIUtils
 import kotlinx.android.synthetic.main.fragment_visa_countries.view.*
 
 /**
@@ -79,5 +80,10 @@ class VisaCountriesFragment : DialogFragment() {
     override fun onStart() {
         super.onStart()
         dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        UIUtils.clearFocusFromFragment(activity!!)
     }
 }
