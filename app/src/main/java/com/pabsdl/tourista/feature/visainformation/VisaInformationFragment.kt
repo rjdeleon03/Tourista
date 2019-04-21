@@ -14,6 +14,7 @@ import com.pabsdl.tourista.Constants
 import com.pabsdl.tourista.R
 import com.pabsdl.tourista.databinding.FragmentVisaInformationBinding
 import com.pabsdl.tourista.feature.visacountriesdialog.VisaCountriesFragment
+import com.pabsdl.tourista.feature.webview.WebViewActivity
 import kotlinx.android.synthetic.main.fragment_visa_information.*
 import kotlinx.android.synthetic.main.fragment_visa_information.view.*
 
@@ -59,6 +60,10 @@ class VisaInformationFragment : Fragment() {
                 Constants.VISA_COUNTRY_REQ_DESTINATION_CODE)
         }
         visaSearchButton.setOnClickListener { mViewModel.searchVisaInfo() }
+        visaReqsSearchButton.setOnClickListener {
+            val intent = Intent(context, WebViewActivity::class.java)
+            context?.startActivity(intent)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -13,4 +13,5 @@
     <string name="visa_passport">Passport</string>
     <string name="visa_destination">Destination</string>
     <string name="visa_search">Search for a country</string>
+    <string name="visa_reqs_search">Search for Requirements</string>
 </resources>
