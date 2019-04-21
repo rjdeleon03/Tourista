@@ -58,10 +58,10 @@ class MainActivity : AppCompatActivity() {
 
         /* Setup navigation drawer listener */
         mainActivityNavigationView.menu.getItem(0).isChecked = true
-        mainActivityNavigationView.setNavigationItemSelectedListener {
-            if (!it.isChecked) {
-                it.isChecked = true
-                when (it.itemId) {
+        mainActivityNavigationView.setNavigationItemSelectedListener { menuItem ->
+            if (!menuItem.isChecked) {
+                menuItem.isChecked = true
+                when (menuItem.itemId) {
                     R.id.menuCurrencyConversion -> {
                         mNavController.navigate(R.id.action_to_currencyConverterFragment)
                     }

@@ -10,4 +10,6 @@
     <string name="currency_convert">Convert</string>
     <string name="menu_currency_conversion">Currency Conversion</string>
     <string name="menu_visa_information">Visa Information</string>
+    <string name="visa_passport">Passport</string>
+    <string name="visa_destination">Destination</string>
 </resources>
