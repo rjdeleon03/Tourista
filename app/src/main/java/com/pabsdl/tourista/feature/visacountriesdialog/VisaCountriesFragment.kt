@@ -1,6 +1,7 @@
 package com.pabsdl.tourista.feature.visacountriesdialog
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.pabsdl.tourista.Constants
 
 import com.pabsdl.tourista.R
 import com.pabsdl.tourista.utils.UIUtils
@@ -37,7 +39,6 @@ class VisaCountriesFragment : DialogFragment() {
          * @param country Country search term.
          * @return A new instance of fragment VisaCountriesFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(country: String) =
             VisaCountriesFragment().apply {
@@ -55,6 +56,12 @@ class VisaCountriesFragment : DialogFragment() {
 
         mViewModel = ViewModelProviders.of(this).get(VisaCountriesViewModel::class.java)
         mAdapter = VisaCountriesAdapter(context!!)
+        mAdapter.setClickHandler {
+            val data = Intent()
+            data.putExtra(Constants.VISA_COUNTRY_RESULT_KEY, it)
+            targetFragment?.onActivityResult(targetRequestCode, Constants.VISA_COUNTRY_RES_CODE, data)
+            dismiss()
+        }
     }
 
     override fun onCreateView(
@@ -64,7 +71,7 @@ class VisaCountriesFragment : DialogFragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_visa_countries, container, false)
         view.visaCountriesRecyclerView.adapter = mAdapter
-        view.visaCountriesSearchText.doOnTextChanged { text, start, count, after ->
+        view.visaCountriesSearchText.doOnTextChanged { text, _, _, _ ->
             mViewModel.searchCountries(text.toString())
         }
         return view
@@ -72,6 +79,8 @@ class VisaCountriesFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.visaCountriesSearchText.setText(country)
+        mViewModel.searchCountries(view.visaCountriesSearchText.text.toString())
         mViewModel.getCountries().observe(viewLifecycleOwner, Observer {
             mAdapter.setCountries(it)
         })
@@ -79,7 +88,7 @@ class VisaCountriesFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     }
 
     override fun onPause() {

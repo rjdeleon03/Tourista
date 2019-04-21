@@ -1,14 +1,17 @@
 package com.pabsdl.tourista.feature.visainformation
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import com.pabsdl.tourista.Constants
 
 import com.pabsdl.tourista.R
+import com.pabsdl.tourista.databinding.FragmentVisaInformationBinding
 import com.pabsdl.tourista.feature.visacountriesdialog.VisaCountriesFragment
 import kotlinx.android.synthetic.main.fragment_visa_information.*
 import kotlinx.android.synthetic.main.fragment_visa_information.view.*
@@ -33,20 +36,44 @@ class VisaInformationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_visa_information, container, false)
-        view.visaPassportText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) displayVisaCountriesFragment(view.visaPassportText.text.toString())
-        }
-        view.visaDestinationText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) displayVisaCountriesFragment(view.visaDestinationText.text.toString())
-        }
-
-        return view
+        val binding = FragmentVisaInformationBinding.inflate(inflater, container, false)
+        binding.viewModel = mViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
     }
 
-    private fun displayVisaCountriesFragment(country: String) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        visaPassportText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) displayVisaCountriesFragment(view.visaPassportText.text.toString(),
+                Constants.VISA_COUNTRY_REQ_PASSPORT_CODE)
+        }
+        visaDestinationText.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) displayVisaCountriesFragment(view.visaDestinationText.text.toString(),
+                Constants.VISA_COUNTRY_REQ_DESTINATION_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Constants.VISA_COUNTRY_RES_CODE) {
+            val country = data?.getStringExtra(Constants.VISA_COUNTRY_RESULT_KEY)
+            when (requestCode) {
+                Constants.VISA_COUNTRY_REQ_PASSPORT_CODE -> {
+                    mViewModel.setPassportCountry(country!!)
+                }
+                Constants.VISA_COUNTRY_REQ_DESTINATION_CODE -> {
+                    mViewModel.setDestinationCountry(country!!)
+                }
+            }
+        }
+    }
+
+    private fun displayVisaCountriesFragment(country: String, requestCode: Int) {
         val dialog = VisaCountriesFragment.newInstance(country)
-        dialog.show(childFragmentManager, VISA_COUNTRIES_FRAGMENT_KEY)
+        dialog.setTargetFragment(this, requestCode)
+        dialog.show(fragmentManager!!, VISA_COUNTRIES_FRAGMENT_KEY)
     }
 
     companion object {

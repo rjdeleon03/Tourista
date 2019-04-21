@@ -12,9 +12,9 @@ class UIUtils {
         fun clearFocusFromFragment(activity: FragmentActivity) {
 
             val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            val cf = activity.currentFocus!!
-            imm!!.hideSoftInputFromWindow(cf.windowToken, 0)
-            cf.clearFocus()
+            val cf = activity.currentFocus
+            imm!!.hideSoftInputFromWindow(cf?.windowToken, 0)
+            cf?.clearFocus()
         }
     }
 }
