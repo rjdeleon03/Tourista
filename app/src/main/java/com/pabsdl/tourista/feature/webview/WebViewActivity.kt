@@ -13,18 +13,28 @@ import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.pabsdl.tourista.Constants
 import com.pabsdl.tourista.R
 import kotlinx.android.synthetic.main.activity_web_view.*
 
 class WebViewActivity : AppCompatActivity() {
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(context: Context, url: String) {
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra(Constants.VISA_INFORMATION_SEARCH_KEY, url)
+            context.startActivity(intent)
+        }
+    }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
 
-        // TODO: Retrieve this from bundle
-        val url = "https://www.google.com/search?q=france+visa+requirements+philippines"
+        val url = intent.getStringExtra(Constants.VISA_INFORMATION_SEARCH_KEY)
 
         setSupportActionBar(webToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

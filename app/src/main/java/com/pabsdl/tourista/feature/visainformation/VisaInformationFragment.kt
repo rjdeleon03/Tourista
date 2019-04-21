@@ -42,10 +42,6 @@ class VisaInformationFragment : Fragment() {
         binding.viewModel = mViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        mViewModel.getVisaInfo().observe(this, Observer {
-            val x = 5
-        })
-
         return binding.root
     }
 
@@ -61,8 +57,7 @@ class VisaInformationFragment : Fragment() {
         }
         visaSearchButton.setOnClickListener { mViewModel.searchVisaInfo() }
         visaReqsSearchButton.setOnClickListener {
-            val intent = Intent(context, WebViewActivity::class.java)
-            context?.startActivity(intent)
+            WebViewActivity.newInstance(activity!!, createSearchUrl())
         }
     }
 
@@ -86,6 +81,14 @@ class VisaInformationFragment : Fragment() {
         val dialog = VisaCountriesFragment.newInstance(country)
         dialog.setTargetFragment(this, requestCode)
         dialog.show(fragmentManager!!, VISA_COUNTRIES_FRAGMENT_KEY)
+    }
+
+    private fun createSearchUrl(): String {
+        val passportCountry = visaPassportText.text.toString()
+        val destinationCountry = visaDestinationText.text.toString()
+        val query = "$destinationCountry visa requirements $passportCountry"
+            .replace(' ', '+')
+        return "https://www.google.com/search?q=$query"
     }
 
     companion object {
