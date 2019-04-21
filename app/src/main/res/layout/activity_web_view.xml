@@ -7,11 +7,18 @@
     android:orientation="vertical"
     tools:context=".feature.webview.WebViewActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/webToolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"/>
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/webToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@android:style/ThemeOverlay.Material.Dark"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <WebView
         android:id="@+id/webView"
