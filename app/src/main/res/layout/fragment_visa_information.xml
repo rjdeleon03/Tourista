@@ -36,6 +36,7 @@
                 android:layout_marginBottom="8dp">
 
                 <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/visaPassportText"
                     style="@style/NoBlankEditTextTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
                 android:layout_marginEnd="8dp">
 
                 <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/visaDestinationText"
                     style="@style/NoBlankEditTextTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,6 +70,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/visaSearchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
