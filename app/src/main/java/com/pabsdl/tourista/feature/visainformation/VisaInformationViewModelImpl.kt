@@ -33,6 +33,8 @@ class VisaInformationViewModelImpl(application: Application) :
 
     override fun getVisaInfo() = mRepository.getVisaInfo()
 
+    override fun getBookmarks() = mRepository.getBookmarks()
+
     override fun searchVisaInfo() {
         val passportCountry = mPassportCountry.value
         val destinationCountry = mDestinationCountry.value

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import com.pabsdl.tourista.Constants
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
+import com.pabsdl.tourista.data.entities.VisaBookmark
 import com.pabsdl.tourista.databinding.FragmentVisaInformationBinding
 import com.pabsdl.tourista.utils.clickWithGuard
 import java.lang.ref.WeakReference
@@ -17,6 +18,7 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
     private val mLifecycleOwner = WeakReference<LifecycleOwner>(lifecycleOwner)
     private val mViewModel = viewModel
     private val mDataBinding = FragmentVisaInformationBinding.inflate(inflater, parent, false)
+    private val mAdapter = VisaInformationBookmarksAdapter(inflater)
     override val mRootView = mDataBinding.root
 
     override val rootView: View
@@ -25,6 +27,8 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
     init {
         mDataBinding.viewModel = mViewModel
         mDataBinding.lifecycleOwner = mLifecycleOwner.get()
+        mDataBinding.visaBookmarksRecyclerView.adapter = mAdapter
+
         mDataBinding.visaReqsSearchButton.clickWithGuard {
             for (listener in mListeners) {
                 listener.onSearchDetailsClicked()

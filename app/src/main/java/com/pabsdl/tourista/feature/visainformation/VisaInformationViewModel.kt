@@ -1,6 +1,7 @@
 package com.pabsdl.tourista.feature.visainformation
 
 import androidx.lifecycle.LiveData
+import com.pabsdl.tourista.data.entities.VisaBookmark
 import com.pabsdl.tourista.model.VisaInfoData
 
 interface VisaInformationViewModel {
@@ -14,6 +15,8 @@ interface VisaInformationViewModel {
     fun setDestinationCountry(country: String)
 
     fun getVisaInfo(): LiveData<VisaInfoData?>
+
+    fun getBookmarks(): LiveData<List<VisaBookmark>>
 
     fun searchVisaInfo()
 

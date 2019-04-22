@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import com.pabsdl.tourista.data.AppDatabase
+import com.pabsdl.tourista.data.entities.VisaBookmark
 import com.pabsdl.tourista.model.VisaInfoData
 import com.pabsdl.tourista.utils.MiscUtils
 
@@ -14,6 +15,8 @@ class VisaInformationRepository(application: Application) {
     private val mVisaInfo: MediatorLiveData<VisaInfoData?> = MediatorLiveData()
 
     fun getVisaInfo(): LiveData<VisaInfoData?> = mVisaInfo
+
+    fun getBookmarks(): LiveData<List<VisaBookmark>> = mDatabase.visaBookmarkDao().getAll()
 
     fun searchVisaInfo(srcCountry: String, destCountry: String) {
         mVisaInfo.addSource(
