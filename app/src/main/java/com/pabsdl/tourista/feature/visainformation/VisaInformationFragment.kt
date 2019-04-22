@@ -7,11 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.pabsdl.tourista.Constants
 
-import com.pabsdl.tourista.R
 import com.pabsdl.tourista.databinding.FragmentVisaInformationBinding
 import com.pabsdl.tourista.feature.visacountriesdialog.VisaCountriesFragment
 import com.pabsdl.tourista.feature.webview.WebViewActivity
@@ -25,41 +23,43 @@ import kotlinx.android.synthetic.main.fragment_visa_information.view.*
  * create an instance of this fragment.
  *
  */
-class VisaInformationFragment : Fragment() {
+class VisaInformationFragment : Fragment(), VisaInformationMvc.Listener {
 
-    private lateinit var mViewModel: VisaInformationViewModel
+    companion object {
+
+        private const val VISA_COUNTRIES_FRAGMENT_KEY = "VISA_COUNTRIES_FRAGMENT_KEY"
+
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @return A new instance of fragment VisaInformationFragment.
+         */
+        @JvmStatic
+        fun newInstance() = VisaInformationFragment()
+    }
+
+    private lateinit var mViewMvc: VisaInformationMvcImpl
+    private lateinit var mViewModel: VisaInformationViewModelImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this).get(VisaInformationViewModel::class.java)
+        mViewModel = ViewModelProviders.of(this).get(VisaInformationViewModelImpl::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val binding = FragmentVisaInformationBinding.inflate(inflater, container, false)
-        binding.viewModel = mViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
 
-        return binding.root
+        mViewMvc = VisaInformationMvcImpl(inflater, container, mViewModel, viewLifecycleOwner)
+        mViewMvc.registerListener(this)
+        return mViewMvc.rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        visaPassportText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) displayVisaCountriesFragment(view.visaPassportText.text.toString(),
-                Constants.VISA_COUNTRY_REQ_PASSPORT_CODE)
-        }
-        visaDestinationText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) displayVisaCountriesFragment(view.visaDestinationText.text.toString(),
-                Constants.VISA_COUNTRY_REQ_DESTINATION_CODE)
-        }
-        visaSearchButton.clickWithGuard { mViewModel.searchVisaInfo() }
-        visaReqsSearchButton.clickWithGuard {
-            WebViewActivity.newInstance(activity!!, createSearchUrl())
-        }
+    override fun onDestroyView() {
+        mViewMvc.unregisterListener(this)
+        super.onDestroyView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -78,9 +78,19 @@ class VisaInformationFragment : Fragment() {
         }
     }
 
-    private fun displayVisaCountriesFragment(country: String, requestCode: Int) {
-        val dialog = VisaCountriesFragment.newInstance(country)
-        dialog.setTargetFragment(this, requestCode)
+    // region VisaInformationMvc.Listener
+
+    override fun onGetVisaInfoClicked() {
+        mViewModel.searchVisaInfo()
+    }
+
+    override fun onSearchDetailsClicked() {
+        WebViewActivity.newInstance(activity!!, createSearchUrl())
+    }
+
+    override fun onCountryFieldClicked(text: String, reqCode: Int) {
+        val dialog = VisaCountriesFragment.newInstance(text)
+        dialog.setTargetFragment(this, reqCode)
         dialog.show(fragmentManager!!, VISA_COUNTRIES_FRAGMENT_KEY)
     }
 
@@ -92,17 +102,5 @@ class VisaInformationFragment : Fragment() {
         return "https://www.google.com/search?q=$query"
     }
 
-    companion object {
-
-        private const val VISA_COUNTRIES_FRAGMENT_KEY = "VISA_COUNTRIES_FRAGMENT_KEY"
-
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment VisaInformationFragment.
-         */
-        @JvmStatic
-        fun newInstance() = VisaInformationFragment()
-    }
+    // endregion
 }

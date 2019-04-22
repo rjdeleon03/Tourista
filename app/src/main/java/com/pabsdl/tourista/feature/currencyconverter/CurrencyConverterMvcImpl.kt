@@ -15,7 +15,10 @@ class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
     private val mLifecycleOwner = WeakReference<LifecycleOwner>(lifecycleOwner)
     private val mViewModel = viewModel
     private val mDataBinding = FragmentCurrencyConverterBinding.inflate(inflater, parent, false)
-    override val mRootView: View = mDataBinding.root
+    override val mRootView = mDataBinding.root
+
+    override val rootView: View
+        get() { return mRootView }
 
     init {
         mDataBinding.viewModel = mViewModel
@@ -32,8 +35,5 @@ class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
             }
         }
     }
-
-    override val rootView: View
-        get() { return mRootView }
 
 }

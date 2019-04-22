@@ -1,39 +1,20 @@
 package com.pabsdl.tourista.feature.visainformation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.pabsdl.tourista.model.VisaInfoData
 
-class VisaInformationViewModel(application: Application) :
-    AndroidViewModel(application) {
+interface VisaInformationViewModel {
 
-    private val mRepository = VisaInformationRepository(application)
-    private val mPassportCountry: MutableLiveData<String> = MutableLiveData()
-    private val mDestinationCountry: MutableLiveData<String> = MutableLiveData()
+    fun getPassportCountry(): LiveData<String>
 
-    // region Text live data
+    fun getDestinationCountry(): LiveData<String>
 
-    fun getPassportCountry(): LiveData<String> = mPassportCountry
+    fun setPassportCountry(country: String)
 
-    fun getDestinationCountry(): LiveData<String> = mDestinationCountry
+    fun setDestinationCountry(country: String)
 
-    fun setPassportCountry(country: String) {
-        mPassportCountry.value = country
-    }
+    fun getVisaInfo(): LiveData<VisaInfoData?>
 
-    fun setDestinationCountry(country: String) {
-        mDestinationCountry.value = country
-    }
+    fun searchVisaInfo()
 
-    // endregion
-
-    // region Repository methods
-
-    fun getVisaInfo() = mRepository.getVisaInfo()
-
-    fun searchVisaInfo() = mRepository.searchVisaInfo(
-        mPassportCountry.value!!, mDestinationCountry.value!!)
-
-    // endregion
 }
