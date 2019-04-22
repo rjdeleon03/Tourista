@@ -15,6 +15,7 @@ import com.pabsdl.tourista.R
 import com.pabsdl.tourista.databinding.FragmentVisaInformationBinding
 import com.pabsdl.tourista.feature.visacountriesdialog.VisaCountriesFragment
 import com.pabsdl.tourista.feature.webview.WebViewActivity
+import com.pabsdl.tourista.utils.clickWithGuard
 import kotlinx.android.synthetic.main.fragment_visa_information.*
 import kotlinx.android.synthetic.main.fragment_visa_information.view.*
 
@@ -55,8 +56,8 @@ class VisaInformationFragment : Fragment() {
             if (hasFocus) displayVisaCountriesFragment(view.visaDestinationText.text.toString(),
                 Constants.VISA_COUNTRY_REQ_DESTINATION_CODE)
         }
-        visaSearchButton.setOnClickListener { mViewModel.searchVisaInfo() }
-        visaReqsSearchButton.setOnClickListener {
+        visaSearchButton.clickWithGuard { mViewModel.searchVisaInfo() }
+        visaReqsSearchButton.clickWithGuard {
             WebViewActivity.newInstance(activity!!, createSearchUrl())
         }
     }
@@ -86,7 +87,7 @@ class VisaInformationFragment : Fragment() {
     private fun createSearchUrl(): String {
         val passportCountry = visaPassportText.text.toString()
         val destinationCountry = visaDestinationText.text.toString()
-        val query = "$destinationCountry visa requirements $passportCountry"
+        val query = "$destinationCountry visa requirements for \"$passportCountry passport \""
             .replace(' ', '+')
         return "https://www.google.com/search?q=$query"
     }

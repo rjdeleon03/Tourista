@@ -100,7 +100,7 @@ class WebViewActivity : AppCompatActivity() {
                 val cm = (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
                 cm.primaryClip = ClipData.newPlainText("text", webView.url)
             }
-            else -> {
+            R.id.menuOpenInBrowser -> {
                 /* Open in external browser */
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webView.url))
                 startActivity(intent)
