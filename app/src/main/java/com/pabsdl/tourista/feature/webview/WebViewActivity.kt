@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
@@ -34,29 +35,33 @@ class WebViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
 
-        val url = intent.getStringExtra(Constants.VISA_INFORMATION_SEARCH_KEY)
+        if (savedInstanceState == null) {
+            val url = intent.getStringExtra(Constants.VISA_INFORMATION_SEARCH_KEY)
 
-        setSupportActionBar(webToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = ""
-        supportActionBar?.subtitle = ""
+            setSupportActionBar(webToolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.title = ""
+            supportActionBar?.subtitle = ""
 
-        webView.settings.javaScriptEnabled = true
-        webView.loadUrl(url)
-        webView.webViewClient = object: WebViewClient() {
+            webView.settings.javaScriptEnabled = true
+            webView.loadUrl(url)
+            webView.webViewClient = object : WebViewClient() {
 
-            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                super.onPageStarted(view, url, favicon)
-                supportActionBar?.title = "Loading..."
-                supportActionBar?.subtitle = webView.url
-            }
+                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                    super.onPageStarted(view, url, favicon)
+                    supportActionBar?.title = "Loading..."
+                    supportActionBar?.subtitle = webView.url
+                }
 
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                supportActionBar?.title = view?.title
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                    supportActionBar?.title = view?.title
+                }
             }
         }
     }
+
+    // region Back navigation
 
     override fun onSupportNavigateUp(): Boolean {
         if (webView.canGoBack())
@@ -72,6 +77,10 @@ class WebViewActivity : AppCompatActivity() {
         else
             finish()
     }
+
+    // endregion
+
+    // region Toolbar menu
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_web_view, menu)
@@ -100,4 +109,19 @@ class WebViewActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
+    // endregion
+
+    // region State management
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        webView.saveState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        webView.restoreState(savedInstanceState)
+    }
+    // endregion
 }
