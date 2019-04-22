@@ -14,11 +14,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.lifecycle.ViewModelProviders
 import com.pabsdl.tourista.Constants
 import com.pabsdl.tourista.R
+import com.pabsdl.tourista.data.entities.VisaBookmark
 import kotlinx.android.synthetic.main.activity_web_view.*
 
 class WebViewActivity : AppCompatActivity() {
+
+    private lateinit var mViewModel: WebViewViewModel
 
     companion object {
 
@@ -34,6 +38,8 @@ class WebViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
+
+        mViewModel = ViewModelProviders.of(this).get(WebViewViewModel::class.java)
 
         if (savedInstanceState == null) {
             val url = intent.getStringExtra(Constants.VISA_INFORMATION_SEARCH_KEY)
@@ -93,7 +99,7 @@ class WebViewActivity : AppCompatActivity() {
 
         when(item.itemId) {
             R.id.menuWebBookmark -> {
-                /* TODO: Save as bookmark */
+                mViewModel.addBookmark(VisaBookmark(title = webView.title, url = webView.url))
             }
             R.id.menuWebCopyUrl -> {
                 /* Copy URL to clipboard */
