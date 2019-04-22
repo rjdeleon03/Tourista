@@ -75,14 +75,11 @@ class VisaInformationFragment : Fragment(), VisaInformationMvc.Listener {
                     mViewModel.setDestinationCountry(country!!)
                 }
             }
+            mViewModel.searchVisaInfo()
         }
     }
 
     // region VisaInformationMvc.Listener
-
-    override fun onGetVisaInfoClicked() {
-        mViewModel.searchVisaInfo()
-    }
 
     override fun onSearchDetailsClicked() {
         WebViewActivity.newInstance(activity!!, createSearchUrl())

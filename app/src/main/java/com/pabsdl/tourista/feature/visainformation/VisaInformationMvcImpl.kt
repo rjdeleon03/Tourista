@@ -22,15 +22,9 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
     override val rootView: View
         get() { return mRootView }
 
-
     init {
         mDataBinding.viewModel = mViewModel
         mDataBinding.lifecycleOwner = mLifecycleOwner.get()
-        mDataBinding.visaSearchButton.clickWithGuard {
-            for (listener in mListeners) {
-                listener.onGetVisaInfoClicked()
-            }
-        }
         mDataBinding.visaReqsSearchButton.clickWithGuard {
             for (listener in mListeners) {
                 listener.onSearchDetailsClicked()

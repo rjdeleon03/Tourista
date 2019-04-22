@@ -33,8 +33,12 @@ class VisaInformationViewModelImpl(application: Application) :
 
     override fun getVisaInfo() = mRepository.getVisaInfo()
 
-    override fun searchVisaInfo() = mRepository.searchVisaInfo(
-        mPassportCountry.value!!, mDestinationCountry.value!!)
+    override fun searchVisaInfo() {
+        val passportCountry = mPassportCountry.value
+        val destinationCountry = mDestinationCountry.value
+        if (!passportCountry.isNullOrEmpty() && !destinationCountry.isNullOrEmpty())
+            mRepository.searchVisaInfo(passportCountry, destinationCountry)
+    }
 
     // endregion
 }

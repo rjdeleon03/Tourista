@@ -8,8 +8,6 @@ interface VisaInformationMvc {
 
         fun onCountryFieldClicked(text: String, reqCode: Int)
 
-        fun onGetVisaInfoClicked()
-
         fun onSearchDetailsClicked()
     }
 }

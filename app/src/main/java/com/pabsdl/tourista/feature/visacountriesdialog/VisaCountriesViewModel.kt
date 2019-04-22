@@ -1,14 +1,11 @@
 package com.pabsdl.tourista.feature.visacountriesdialog
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 
-class VisaCountriesViewModel(application: Application) :
-    AndroidViewModel(application) {
+interface VisaCountriesViewModel {
 
-    private val mRepository = VisaCountriesRepository(application)
+    fun getCountries(): LiveData<List<String>>
 
-    fun getCountries() = mRepository.getCountries()
+    fun searchCountries(country: String)
 
-    fun searchCountries(country: String) = mRepository.searchCountries(country)
 }

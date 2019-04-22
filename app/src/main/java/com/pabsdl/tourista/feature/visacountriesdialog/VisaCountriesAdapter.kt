@@ -1,6 +1,5 @@
 package com.pabsdl.tourista.feature.visacountriesdialog
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pabsdl.tourista.R
 import kotlinx.android.synthetic.main.item_visa_country_result.view.*
 
-class VisaCountriesAdapter(context: Context) :
+class VisaCountriesAdapter(inflater: LayoutInflater) :
     RecyclerView.Adapter<VisaCountriesAdapter.ViewHolder>() {
 
-    private val mInflater = LayoutInflater.from(context)
+    private val mInflater = inflater
     private var mCountries: List<String>? = null
     private var mClickHandler: ((String) -> Unit)? = null
 

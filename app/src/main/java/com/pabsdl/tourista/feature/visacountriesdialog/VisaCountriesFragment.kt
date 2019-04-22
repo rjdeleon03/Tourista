@@ -14,7 +14,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.pabsdl.tourista.Constants
 
 import com.pabsdl.tourista.R
+import com.pabsdl.tourista.feature.visainformation.VisaInformationMvcImpl
 import com.pabsdl.tourista.utils.UIUtils
+import kotlinx.android.synthetic.main.fragment_visa_countries.*
 import kotlinx.android.synthetic.main.fragment_visa_countries.view.*
 
 /**
@@ -23,10 +25,7 @@ import kotlinx.android.synthetic.main.fragment_visa_countries.view.*
  * create an instance of this fragment.
  *
  */
-class VisaCountriesFragment : DialogFragment() {
-    private var country: String? = null
-    private lateinit var mViewModel: VisaCountriesViewModel
-    private lateinit var mAdapter: VisaCountriesAdapter
+class VisaCountriesFragment : DialogFragment(), VisaCountriesMvc.Listener {
 
     companion object {
 
@@ -48,33 +47,32 @@ class VisaCountriesFragment : DialogFragment() {
             }
     }
 
+    private var country: String? = null
+    private lateinit var mViewMvc: VisaCountriesMvcImpl
+    private lateinit var mViewModel: VisaCountriesViewModelImpl
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             country = it.getString(COUNTRY_KEY)
         }
 
-        mViewModel = ViewModelProviders.of(this).get(VisaCountriesViewModel::class.java)
-        mAdapter = VisaCountriesAdapter(context!!)
-        mAdapter.setClickHandler {
-            val data = Intent()
-            data.putExtra(Constants.VISA_COUNTRY_RESULT_KEY, it)
-            targetFragment?.onActivityResult(targetRequestCode, Constants.VISA_COUNTRY_RES_CODE, data)
-            dismiss()
-        }
+        mViewModel = ViewModelProviders.of(this).get(VisaCountriesViewModelImpl::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_visa_countries, container, false)
-        view.visaCountriesRecyclerView.adapter = mAdapter
-        view.visaCountriesSearchText.doOnTextChanged { text, _, _, _ ->
-            mViewModel.searchCountries(text.toString())
-        }
-        return view
+
+        mViewMvc = VisaCountriesMvcImpl(inflater, container)
+        mViewMvc.registerListener(this)
+        return mViewMvc.rootView
+    }
+
+    override fun onDestroyView() {
+        mViewMvc.unregisterListener(this)
+        super.onDestroyView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,7 +80,7 @@ class VisaCountriesFragment : DialogFragment() {
         view.visaCountriesSearchText.setText(country)
         mViewModel.searchCountries(view.visaCountriesSearchText.text.toString())
         mViewModel.getCountries().observe(viewLifecycleOwner, Observer {
-            mAdapter.setCountries(it)
+            mViewMvc.setCountries(it)
         })
     }
 
@@ -95,4 +93,19 @@ class VisaCountriesFragment : DialogFragment() {
         super.onPause()
         UIUtils.clearFocusFromFragment(activity!!)
     }
+
+    // region VisaCountriesMvc.Listener
+
+    override fun onItemClicked(country: String) {
+        val data = Intent()
+        data.putExtra(Constants.VISA_COUNTRY_RESULT_KEY, country)
+        targetFragment?.onActivityResult(targetRequestCode, Constants.VISA_COUNTRY_RES_CODE, data)
+        dismiss()
+    }
+
+    override fun onSearchInputChanged(input: String) {
+        mViewModel.searchCountries(visaCountriesSearchText.text.toString())
+    }
+
+    // endregion
 }
