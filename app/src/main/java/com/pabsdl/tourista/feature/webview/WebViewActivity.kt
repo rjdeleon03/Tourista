@@ -12,17 +12,15 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.lifecycle.ViewModelProviders
 import com.pabsdl.tourista.Constants
 import com.pabsdl.tourista.R
-import com.pabsdl.tourista.data.entities.VisaBookmark
 import kotlinx.android.synthetic.main.activity_web_view.*
 
 class WebViewActivity : AppCompatActivity() {
-
-    private lateinit var mViewModel: WebViewViewModel
 
     companion object {
 
@@ -39,8 +37,6 @@ class WebViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
 
-        mViewModel = ViewModelProviders.of(this).get(WebViewViewModel::class.java)
-
         if (savedInstanceState == null) {
             val url = intent.getStringExtra(Constants.VISA_INFORMATION_SEARCH_KEY)
 
@@ -51,17 +47,20 @@ class WebViewActivity : AppCompatActivity() {
 
             webView.settings.javaScriptEnabled = true
             webView.loadUrl(url)
-            webView.webViewClient = object : WebViewClient() {
+            webView.webChromeClient = object : WebChromeClient() {
 
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                    super.onPageStarted(view, url, favicon)
-                    supportActionBar?.title = "Loading..."
-                    supportActionBar?.subtitle = webView.url
+                override fun onReceivedTitle(view: WebView?, title: String?) {
+                    super.onReceivedTitle(view, title)
+                    if (!title!!.contains("://"))
+                        supportActionBar?.title = title
                 }
 
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    super.onPageFinished(view, url)
-                    supportActionBar?.title = view?.title
+                override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                    super.onProgressChanged(view, newProgress)
+                    if (newProgress == 10) {
+                        supportActionBar?.title = "Loading..."
+                        supportActionBar?.subtitle = webView.url
+                    }
                 }
             }
         }
@@ -98,8 +97,8 @@ class WebViewActivity : AppCompatActivity() {
         if (item == null) return true
 
         when(item.itemId) {
-            R.id.menuWebBookmark -> {
-                mViewModel.addBookmark(VisaBookmark(title = webView.title, url = webView.url))
+            R.id.menuWebRefresh -> {
+                webView.reload()
             }
             R.id.menuWebCopyUrl -> {
                 /* Copy URL to clipboard */

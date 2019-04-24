@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menuWebBookmark"
-        android:title="@string/menu_web_bookmark"/>
+    <item android:id="@+id/menuWebRefresh"
+        android:title="@string/menu_web_refresh"/>
     <item android:id="@+id/menuWebCopyUrl"
         android:title="@string/menu_web_copy_url"/>
     <item android:id="@+id/menuOpenInBrowser"
