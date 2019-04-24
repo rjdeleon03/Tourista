@@ -19,13 +19,24 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
     private val mLifecycleOwner = WeakReference<LifecycleOwner>(lifecycleOwner)
     private val mViewModel = viewModel
     private val mDataBinding = FragmentVisaInformationBinding.inflate(inflater, parent, false)
-    private val mAdapter = VisaInformationBookmarksAdapter(inflater)
+    private var mAdapter : VisaInformationBookmarksAdapter
     override val mRootView = mDataBinding.root
 
     override val rootView: View
         get() { return mRootView }
 
     init {
+        val clickedAction = {
+            bookmark:VisaBookmark -> for (listener in mListeners) {
+                listener.onBookmarkItemClicked(bookmark)
+            }
+        }
+        val longPressedAction = {
+            bookmark:VisaBookmark -> for (listener in mListeners) {
+                listener.onBookmarkItemLongPressed(bookmark)
+            }
+        }
+        mAdapter = VisaInformationBookmarksAdapter(inflater, clickedAction, longPressedAction)
         mDataBinding.viewModel = mViewModel
         mDataBinding.lifecycleOwner = mLifecycleOwner.get()
         mDataBinding.visaBookmarksRecyclerView.adapter = mAdapter

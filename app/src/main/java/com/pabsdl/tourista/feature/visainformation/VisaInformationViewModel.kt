@@ -16,8 +16,10 @@ interface VisaInformationViewModel {
 
     fun getVisaInfo(): LiveData<VisaInfoData?>
 
+    fun searchVisaInfo()
+
     fun getBookmarks(): LiveData<List<VisaBookmark>>
 
-    fun searchVisaInfo()
+    fun deleteBookmark(bookmark: VisaBookmark)
 
 }

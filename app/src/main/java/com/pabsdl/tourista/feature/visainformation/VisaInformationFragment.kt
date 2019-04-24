@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.pabsdl.tourista.Constants
+import com.pabsdl.tourista.data.entities.VisaBookmark
 
 import com.pabsdl.tourista.databinding.FragmentVisaInformationBinding
 import com.pabsdl.tourista.feature.visacountriesdialog.VisaCountriesFragment
@@ -90,6 +92,14 @@ class VisaInformationFragment : Fragment(), VisaInformationMvc.Listener {
         val dialog = VisaCountriesFragment.newInstance(text)
         dialog.setTargetFragment(this, reqCode)
         dialog.show(fragmentManager!!, VISA_COUNTRIES_FRAGMENT_KEY)
+    }
+
+    override fun onBookmarkItemClicked(bookmark: VisaBookmark) {
+        WebViewActivity.newInstance(context!!, bookmark.url)
+    }
+
+    override fun onBookmarkItemLongPressed(bookmark: VisaBookmark) {
+        mViewModel.deleteBookmark(bookmark)
     }
 
     private fun createSearchUrl(): String {

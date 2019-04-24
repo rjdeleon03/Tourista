@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.pabsdl.tourista.data.entities.VisaBookmark
 import com.pabsdl.tourista.model.VisaInfoData
 
 class VisaInformationViewModelImpl(application: Application) :
@@ -33,14 +34,16 @@ class VisaInformationViewModelImpl(application: Application) :
 
     override fun getVisaInfo() = mRepository.getVisaInfo()
 
-    override fun getBookmarks() = mRepository.getBookmarks()
-
     override fun searchVisaInfo() {
         val passportCountry = mPassportCountry.value
         val destinationCountry = mDestinationCountry.value
         if (!passportCountry.isNullOrEmpty() && !destinationCountry.isNullOrEmpty())
             mRepository.searchVisaInfo(passportCountry, destinationCountry)
     }
+
+    override fun getBookmarks() = mRepository.getBookmarks()
+
+    override fun deleteBookmark(bookmark: VisaBookmark) = mRepository.deleteBookmark(bookmark)
 
     // endregion
 }
