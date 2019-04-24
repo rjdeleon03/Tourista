@@ -4,12 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
+    android:clickable="true"
+    android:focusable="true"
     android:background="?android:attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/visaBookmarkTitleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_bold"
+        android:maxLines="1"
         android:ellipsize="end"/>
 
     <TextView
@@ -17,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:fontFamily="@font/raleway_regular"
+        android:maxLines="1"
         android:ellipsize="end"/>
 
 </LinearLayout>

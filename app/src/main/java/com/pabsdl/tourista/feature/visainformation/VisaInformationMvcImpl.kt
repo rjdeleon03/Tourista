@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.pabsdl.tourista.Constants
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
 import com.pabsdl.tourista.data.entities.VisaBookmark
@@ -48,6 +49,9 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
                         Constants.VISA_COUNTRY_REQ_DESTINATION_CODE)
                 }
         }
+        mViewModel.getBookmarks().observe(mLifecycleOwner.get()!!, Observer {
+            mAdapter.setBookmarks(it)
+        })
     }
 
 }

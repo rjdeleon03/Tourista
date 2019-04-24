@@ -136,7 +136,6 @@
                 android:id="@+id/visaBookmarksRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visaBookmarks="@{viewModel.bookmarks}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         </com.google.android.material.card.MaterialCardView>
