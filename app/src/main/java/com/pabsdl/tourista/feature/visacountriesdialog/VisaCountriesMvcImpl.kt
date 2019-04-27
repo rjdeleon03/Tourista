@@ -33,5 +33,9 @@ class VisaCountriesMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
         mRootView.visaCountriesSearchText.requestFocus()
     }
 
+    override fun setCountryInput(country: String?) {
+        mRootView.visaCountriesSearchText.setText(country)
+    }
+
     override fun setCountries(countries: List<String>) = mAdapter.setCountries(countries)
 }

@@ -17,4 +17,6 @@
     <string name="menu_web_copy_url">Copy address</string>
     <string name="menu_web_refresh">Reload page</string>
     <string name="menu_open_in_browser">Open in Another App</string>
+    <string name="visa_label_countries">Countries</string>
+    <string name="visa_label_result">Result</string>
 </resources>

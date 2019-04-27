@@ -77,7 +77,7 @@ class VisaCountriesFragment : DialogFragment(), VisaCountriesMvc.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.visaCountriesSearchText.setText(country)
+        mViewMvc.setCountryInput(country)
         mViewModel.searchCountries(view.visaCountriesSearchText.text.toString())
         mViewModel.getCountries().observe(viewLifecycleOwner, Observer {
             mViewMvc.setCountries(it)

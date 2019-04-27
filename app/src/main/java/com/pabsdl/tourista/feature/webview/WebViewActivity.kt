@@ -49,17 +49,13 @@ class WebViewActivity : AppCompatActivity() {
             webView.loadUrl(url)
             webView.webChromeClient = object : WebChromeClient() {
 
-                override fun onReceivedTitle(view: WebView?, title: String?) {
-                    super.onReceivedTitle(view, title)
-                    if (!title!!.contains("://"))
-                        supportActionBar?.title = title
-                }
-
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)
                     if (newProgress == 10) {
                         supportActionBar?.title = "Loading..."
                         supportActionBar?.subtitle = webView.url
+                    } else if (newProgress == 100) {
+                        supportActionBar?.title = webView.title
                     }
                 }
             }
@@ -98,7 +94,7 @@ class WebViewActivity : AppCompatActivity() {
 
         when(item.itemId) {
             R.id.menuWebRefresh -> {
-                webView.reload()
+                webView.loadUrl(webView.url)
             }
             R.id.menuWebCopyUrl -> {
                 /* Copy URL to clipboard */

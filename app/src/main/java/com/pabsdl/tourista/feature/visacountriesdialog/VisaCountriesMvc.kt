@@ -12,6 +12,8 @@ interface VisaCountriesMvc {
 
     }
 
+    fun setCountryInput(country: String?)
+
     fun setCountries(countries: List<String>)
 
 }

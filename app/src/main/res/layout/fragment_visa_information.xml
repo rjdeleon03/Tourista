@@ -9,22 +9,28 @@
             type="com.pabsdl.tourista.feature.visainformation.VisaInformationViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@color/colorPrimary"
         tools:context=".feature.visainformation.VisaInformationFragment">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="@string/visa_label_countries"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/visaCardView"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            style="@style/CardViewThemeDefault"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginTop="4dp"
+            style="@style/CardViewThemeDefault">
 
             <LinearLayout
                 android:id="@+id/visaCardLinearLayout"
@@ -41,13 +47,13 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp">
 
-                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    <EditText
                         android:id="@+id/visaPassportText"
                         style="@style/NoBlankEditTextTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/visa_passport"
-                        android:editable="false"
+                        android:inputType="none"
                         android:text="@{viewModel.passportCountry}"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -64,13 +70,12 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp">
 
-                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    <EditText
                         android:id="@+id/visaDestinationText"
                         style="@style/NoBlankEditTextTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/visa_destination"
-                        android:editable="false"
                         android:text="@{viewModel.destinationCountry}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -79,16 +84,18 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            style="@style/CardViewThemeDefault"
-            app:layout_constraintTop_toBottomOf="@id/visaCardView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:textColor="@android:color/white"
+            android:text="@string/visa_label_result"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            style="@style/CardViewThemeDefault">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -113,5 +120,5 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

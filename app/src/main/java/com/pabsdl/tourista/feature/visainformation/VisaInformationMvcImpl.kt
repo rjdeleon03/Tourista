@@ -25,6 +25,8 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
     init {
         mDataBinding.viewModel = mViewModel
         mDataBinding.lifecycleOwner = mLifecycleOwner.get()
+        mDataBinding.visaPassportText.keyListener = null
+        mDataBinding.visaDestinationText.keyListener = null
         mDataBinding.visaReqsSearchButton.clickWithGuard {
             for (listener in mListeners) {
                 listener.onSearchDetailsClicked()
