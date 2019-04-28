@@ -56,10 +56,7 @@ class VisaCountriesFragment : DialogFragment(), VisaCountriesMvc.Listener {
         arguments?.let {
             country = it.getString(COUNTRY_KEY)
         }
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(VisaCountriesViewModelImpl::class.java)
     }
 

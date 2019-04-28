@@ -37,8 +37,8 @@ class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
     private lateinit var mViewMvc: CurrencyConverterMvcImpl
     private lateinit var mViewModel: CurrencyConverterViewModelImpl
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(CurrencyConverterViewModelImpl::class.java)
     }
 

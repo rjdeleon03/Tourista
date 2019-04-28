@@ -42,8 +42,8 @@ class VisaInformationFragment : Fragment(), VisaInformationMvc.Listener {
     private lateinit var mViewMvc: VisaInformationMvcImpl
     private lateinit var mViewModel: VisaInformationViewModelImpl
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(VisaInformationViewModelImpl::class.java)
     }
 
