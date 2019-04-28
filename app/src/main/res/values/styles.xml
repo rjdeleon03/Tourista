@@ -9,6 +9,15 @@
         <item name="android:fontFamily">@font/raleway_semibold</item>
     </style>
 
+    <!-- Bottom navigation theme. -->
+    <style name="BottomNavigationTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/raleway_semibold</item>
+    </style>
+
     <!-- Drawer theme -->
     <style name="DrawerTheme" parent="Theme.AppCompat">
         <item name="android:fontFamily">@font/raleway_semibold</item>
