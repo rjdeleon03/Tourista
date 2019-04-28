@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mNavController = findNavController(R.id.mainActivityFragment)
+        mainActivityNavigationView.setupWithNavController(mNavController)
 
 //        setupAppBar()
     }

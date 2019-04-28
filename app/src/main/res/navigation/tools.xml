@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tools"
+    app:startDestination="@id/toolsFragment">
+
+    <fragment
+        android:id="@+id/toolsFragment"
+        android:name="com.pabsdl.tourista.feature.tools.ToolsFragment"
+        android:label="fragment_tools"
+        tools:layout="@layout/fragment_tools" >
+        <action
+            android:id="@+id/action_toolsFragment_to_currencyConverterFragment"
+            app:destination="@id/currencyConverterFragment" />
+        <action
+            android:id="@+id/action_toolsFragment_to_visaInformationFragment"
+            app:destination="@id/visaInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currencyConverterFragment"
+        android:name="com.pabsdl.tourista.feature.currencyconverter.CurrencyConverterFragment"
+        android:label="CurrencyConverterFragment" />
+    <fragment
+        android:id="@+id/visaInformationFragment"
+        android:name="com.pabsdl.tourista.feature.visainformation.VisaInformationFragment"
+        android:label="VisaInformationFragment" />
+
+
+</navigation>
