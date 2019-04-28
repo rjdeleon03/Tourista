@@ -91,34 +91,13 @@
             android:textColor="@android:color/white"
             android:text="@string/visa_label_result"/>
 
-        <com.google.android.material.card.MaterialCardView
+        <com.pabsdl.tourista.view.visainformationresult.VisaInformationResultView
+            android:id="@+id/visaInfoResultView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            style="@style/CardViewThemeDefault">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:visaInfo="@{viewModel.visaInfo}"/>
-
-                <Button
-                    android:id="@+id/visaReqsSearchButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_rounded_bottom_small"
-                    android:textColor="@android:color/white"
-                    android:text="@string/visa_reqs_search"/>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+            android:gravity="center"
+            android:visaInfo="@{viewModel.visaInfo}"/>
 
     </LinearLayout>
 </layout>

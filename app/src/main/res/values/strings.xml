@@ -19,4 +19,10 @@
     <string name="menu_open_in_browser">Open in Another App</string>
     <string name="visa_label_countries">Countries</string>
     <string name="visa_label_result">Result</string>
+    <string name="visa_info_same_country">Your input is invalid.</string>
+    <string name="visa_info_eta">You will need an electronic travel authorization (ETA).</string>
+    <string name="visa_info_free">You do not need a visa.</string>
+    <string name="visa_info_arrival">You will need a visa on arrival.</string>
+    <string name="visa_info_required">You will need to apply for a visa.</string>
+    <string name="visa_info_no_input">Specify your passport and destination countries.</string>
 </resources>

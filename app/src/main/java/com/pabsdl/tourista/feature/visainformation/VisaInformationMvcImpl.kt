@@ -27,11 +27,7 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
         mDataBinding.lifecycleOwner = mLifecycleOwner.get()
         mDataBinding.visaPassportText.keyListener = null
         mDataBinding.visaDestinationText.keyListener = null
-        mDataBinding.visaReqsSearchButton.clickWithGuard {
-            for (listener in mListeners) {
-                listener.onSearchDetailsClicked()
-            }
-        }
+        mDataBinding.visaInfoResultView.reqsSearchClickAction = ::createReqsSearchClickAction
         mDataBinding.visaPassportText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
                 for (listener in mListeners) {
@@ -48,4 +44,9 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
         }
     }
 
+    private fun createReqsSearchClickAction() {
+        for (listener in mListeners) {
+            listener.onSearchDetailsClicked()
+        }
+    }
 }

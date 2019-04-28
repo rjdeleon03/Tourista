@@ -13,6 +13,7 @@ import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.lifecycle.ViewModelProviders
@@ -46,19 +47,25 @@ class WebViewActivity : AppCompatActivity() {
             supportActionBar?.subtitle = ""
 
             webView.settings.javaScriptEnabled = true
-            webView.loadUrl(url)
-            webView.webChromeClient = object : WebChromeClient() {
+            webView.webViewClient = object : WebViewClient() {
 
-                override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    super.onProgressChanged(view, newProgress)
-                    if (newProgress == 10) {
-                        supportActionBar?.title = "Loading..."
-                        supportActionBar?.subtitle = webView.url
-                    } else if (newProgress == 100) {
-                        supportActionBar?.title = webView.title
-                    }
+                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                    super.onPageStarted(view, url, favicon)
+                    supportActionBar?.title = "Loading..."
+                    supportActionBar?.subtitle = webView.url
+                }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    super.onPageFinished(view, url)
+                    supportActionBar?.title = view?.title
+                }
+
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
+                    webView.loadUrl(url)
+                    return true
                 }
             }
+            webView.loadUrl(url)
         }
     }
 

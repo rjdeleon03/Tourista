@@ -1,10 +1,11 @@
 package com.pabsdl.tourista.common.adapters
 
-import android.widget.TextView
+import android.widget.Button
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import com.google.android.material.textfield.TextInputEditText
 import com.pabsdl.tourista.model.VisaInfoData
+import com.pabsdl.tourista.view.visainformationresult.VisaInformationResultView
 
 @BindingAdapter("android:text")
 fun setFloatToText(et: TextInputEditText, f: Float?) {
@@ -24,10 +25,11 @@ fun setTextToFloat(et: TextInputEditText) : Float? {
 }
 
 @BindingAdapter("android:visaInfo")
-fun setVisaInfoToText(tv: TextView, vi: VisaInfoData?) {
-    if (vi == null) {
-        tv.text = "-"
-        return
-    }
-    tv.text = vi.toString()
+fun setVisaInfoToText(vv: VisaInformationResultView, vi: VisaInfoData?) {
+    vv.infoData = vi
+}
+
+@BindingAdapter("android:visaInfo")
+fun setVisaInfoToButton(bt: Button, vi: VisaInfoData?) {
+    bt.isEnabled = vi != null && vi != VisaInfoData.SAME_COUNTRY
 }
