@@ -39,8 +39,8 @@ class VisaInformationFragment : Fragment(), VisaInformationMvc.Listener {
         fun newInstance() = VisaInformationFragment()
     }
 
-    private lateinit var mViewMvc: VisaInformationMvcImpl
-    private lateinit var mViewModel: VisaInformationViewModelImpl
+    private lateinit var mViewMvc: VisaInformationMvc
+    private lateinit var mViewModel: VisaInformationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

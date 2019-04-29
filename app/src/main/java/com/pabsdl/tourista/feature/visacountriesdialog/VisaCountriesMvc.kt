@@ -1,8 +1,9 @@
 package com.pabsdl.tourista.feature.visacountriesdialog
 
 import com.pabsdl.tourista.common.base.BaseListener
+import com.pabsdl.tourista.common.base.ObservableViewMvc
 
-interface VisaCountriesMvc {
+interface VisaCountriesMvc : ObservableViewMvc<VisaCountriesMvc.Listener> {
 
     interface Listener: BaseListener {
 

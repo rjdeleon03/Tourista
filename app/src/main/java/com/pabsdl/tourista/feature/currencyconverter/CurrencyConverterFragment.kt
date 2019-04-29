@@ -34,8 +34,8 @@ class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
             CurrencyConverterFragment()
     }
 
-    private lateinit var mViewMvc: CurrencyConverterMvcImpl
-    private lateinit var mViewModel: CurrencyConverterViewModelImpl
+    private lateinit var mViewMvc: CurrencyConverterMvc
+    private lateinit var mViewModel: CurrencyConverterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

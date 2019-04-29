@@ -48,8 +48,8 @@ class VisaCountriesFragment : DialogFragment(), VisaCountriesMvc.Listener {
     }
 
     private var country: String? = null
-    private lateinit var mViewMvc: VisaCountriesMvcImpl
-    private lateinit var mViewModel: VisaCountriesViewModelImpl
+    private lateinit var mViewMvc: VisaCountriesMvc
+    private lateinit var mViewModel: VisaCountriesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
