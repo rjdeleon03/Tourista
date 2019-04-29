@@ -7,7 +7,7 @@
 
     <fragment
         class="com.here.android.mpa.mapping.SupportMapFragment"
-        android:id="@+id/mapfragment"
+        android:id="@+id/tripsMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

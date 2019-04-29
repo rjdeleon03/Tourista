@@ -30,20 +30,6 @@
             app:buttonText="@string/menu_visa_information"
             app:srcImage="@drawable/ic_library_books_black_24dp"/>
 
-        <com.pabsdl.tourista.view.toolitemview.ToolItemView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            app:buttonText="@string/menu_visa_information"
-            app:srcImage="@drawable/ic_library_books_black_24dp"/>
-
-        <com.pabsdl.tourista.view.toolitemview.ToolItemView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            app:buttonText="@string/menu_visa_information"
-            app:srcImage="@drawable/ic_library_books_black_24dp"/>
-
     </GridLayout>
 
 
