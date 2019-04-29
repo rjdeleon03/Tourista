@@ -6,6 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
+import com.pabsdl.tourista.network.CurrencyRetrofitFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass.
@@ -27,14 +34,20 @@ class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
             CurrencyConverterFragment()
     }
 
-    private lateinit var mViewMvc: CurrencyConverterMvcImpl
+    private lateinit var mViewMvc: CurrencyConverterMvc
+    private lateinit var mViewModel: CurrencyConverterViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(this).get(CurrencyConverterViewModelImpl::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        mViewMvc = CurrencyConverterMvcImpl(inflater, container)
+        mViewMvc = CurrencyConverterMvcImpl(inflater, container, mViewModel, viewLifecycleOwner)
         mViewMvc.registerListener(this)
         return mViewMvc.rootView
     }
@@ -45,7 +58,7 @@ class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
     }
 
     override fun onConvertClicked() {
-        // TODO: Handle convert button click
+        mViewModel.getConversionRate()
     }
 
     override fun onSwapCurrencyClicked() {

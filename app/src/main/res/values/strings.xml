@@ -8,4 +8,24 @@
     <string name="currency_target_amount">Target Currency Amount</string>
     <string name="currency_base_amount">Base Currency Amount</string>
     <string name="currency_convert">Convert</string>
+    <string name="menu_currency_conversion">Currency Conversion</string>
+    <string name="menu_visa_information">Visa Information</string>
+    <string name="visa_passport">Passport</string>
+    <string name="visa_destination">Destination</string>
+    <string name="visa_search">Search for a country</string>
+    <string name="visa_reqs_search">View more details</string>
+    <string name="menu_web_copy_url">Copy address</string>
+    <string name="menu_web_refresh">Reload page</string>
+    <string name="menu_open_in_browser">Open in Another App</string>
+    <string name="visa_label_countries">Countries</string>
+    <string name="visa_label_result">Result</string>
+    <string name="visa_info_same_country">Your input is invalid.</string>
+    <string name="visa_info_eta">You will need an electronic travel authorization (ETA).</string>
+    <string name="visa_info_free">You do not need a visa.</string>
+    <string name="visa_info_arrival">You will need a visa on arrival.</string>
+    <string name="visa_info_required">You will need to apply for a visa.</string>
+    <string name="visa_info_no_input">Specify your passport and destination countries.</string>
+    <string name="menu_trips">Trips</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_settings">Settings</string>
 </resources>

@@ -1,106 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/shape_rounded_top"
-    android:orientation="vertical"
-    android:padding="24dp"
-    tools:context=".feature.currencyconverter.CurrencyConverterFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.pabsdl.tourista.feature.currencyconverter.CurrencyConverterViewModel"/>
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_rounded_top"
+        android:orientation="vertical"
+        android:padding="24dp"
+        tools:context=".feature.currencyconverter.CurrencyConverterFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:hint="@string/currency_base_amount"/>
+                style="@style/TextInputDarkerAccentTheme">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/currency_base_amount"
+                    android:text="@={viewModel.conversionData.baseAmount}"/>
 
-    </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="@android:color/darker_gray" />
-
-        <Button
-            android:id="@+id/currencyConvertButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="2"
-            android:layout_marginStart="8dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="0dp"
-            android:background="@drawable/shape_rounded_left"
-            android:backgroundTint="@color/colorAccentDark"
-            android:textColor="@android:color/white"
-            android:text="@string/currency_convert"/>
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="0dp"/>
-
-        <ImageButton
-            android:id="@+id/currencySwapButton"
-            android:layout_width="75dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/shape_rounded_right"
-            android:textColor="@android:color/white"
-            app:srcCompat="@drawable/ic_swap_vert_black_24dp"
-            android:scaleType="fitCenter"
-            android:paddingStart="0dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:backgroundTint="@color/colorAccentMedium"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="@android:color/darker_gray" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:orientation="horizontal"
+            android:gravity="center">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray" />
+
+            <Button
+                android:id="@+id/currencyConvertButton"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="0dp"
+                android:background="@drawable/shape_rounded_left"
+                android:backgroundTint="@color/colorAccentDark"
+                android:textColor="@android:color/white"
+                android:text="@string/currency_convert"
+                android:elevation="2dp"
+                android:stateListAnimator="@null"/>
+
+            <ImageButton
+                android:id="@+id/currencySwapButton"
+                android:layout_width="75dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_rounded_right"
+                android:textColor="@android:color/white"
+                app:srcCompat="@drawable/ic_swap_vert_black_24dp"
+                android:scaleType="fitCenter"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:backgroundTint="@color/colorAccentMedium"
+                android:elevation="2dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/currency_target_amount"
-                android:enabled="false"/>
+                style="@style/TextInputDarkerAccentTheme">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/currency_target_amount"
+                    android:enabled="false"
+                    android:text="@{viewModel.conversionData.targetAmount}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</layout>

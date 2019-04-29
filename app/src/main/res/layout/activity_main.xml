@@ -9,18 +9,20 @@
     android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:title="@string/app_name"
-        android:theme="@android:style/ThemeOverlay.Material.Dark"/>
-
     <fragment
         android:id="@+id/mainActivityFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/main_nav"/>
+        app:navGraph="@navigation/main_nav" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/mainActivityNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/BottomNavigationTheme"
+        app:menu="@menu/menu_navigation"/>
 
 </LinearLayout>

@@ -3,12 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/currencyConverterFragment">
+    app:startDestination="@id/tripsFragment">
 
+    <fragment
+        android:id="@+id/tripsFragment"
+        android:name="com.pabsdl.tourista.feature.trips.TripsFragment"
+        android:label="fragment_trips"
+        tools:layout="@layout/fragment_trips" />
     <fragment
         android:id="@+id/currencyConverterFragment"
         android:name="com.pabsdl.tourista.feature.currencyconverter.CurrencyConverterFragment"
-        android:label="fragment_currency_converter"
+        android:label="@string/menu_currency_conversion"
         tools:layout="@layout/fragment_currency_converter" />
+    <fragment
+        android:id="@+id/visaInformationFragment"
+        android:name="com.pabsdl.tourista.feature.visainformation.VisaInformationFragment"
+        android:label="@string/menu_visa_information"
+        tools:layout="@layout/fragment_visa_information" />
+    <fragment
+        android:id="@+id/toolsFragment"
+        android:name="com.pabsdl.tourista.feature.tools.ToolsFragment"
+        android:label="fragment_tools"
+        tools:layout="@layout/fragment_tools" >
+        <action
+            android:id="@+id/action_toolsFragment_to_currencyConverterFragment"
+            app:destination="@id/currencyConverterFragment" />
+        <action
+            android:id="@+id/action_toolsFragment_to_visaInformationFragment"
+            app:destination="@id/visaInformationFragment" />
+    </fragment>
 
 </navigation>
