@@ -15,6 +15,7 @@
         android:useDefaultMargins="true">
 
         <com.pabsdl.tourista.view.toolitemview.ToolItemView
+            android:id="@+id/toolsCurrencyConversionButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -22,6 +23,7 @@
             app:srcImage="@drawable/ic_attach_money_black_24dp"/>
 
         <com.pabsdl.tourista.view.toolitemview.ToolItemView
+            android:id="@+id/toolsVisaInformationButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"

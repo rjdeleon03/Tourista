@@ -9,13 +9,14 @@ import android.view.ViewGroup
 
 import com.pabsdl.tourista.R
 
-class ToolsFragment : Fragment() {
+class ToolsFragment : Fragment(), ToolsMvc.Listener {
 
     companion object {
         fun newInstance() = ToolsFragment()
     }
 
     private lateinit var mViewModel: ToolsViewModel
+    private lateinit var mViewMvc: ToolsMvc
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +27,23 @@ class ToolsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_tools, container, false)
+        mViewMvc = ToolsMvcImpl(inflater, container)
+        mViewMvc.registerListener(this)
+        return mViewMvc.rootView
     }
 
+    override fun onDestroyView() {
+        mViewMvc.unregisterListener(this)
+        super.onDestroyView()
+    }
+
+    // region ToolsMvc.Listener
+
+    override fun onCurrencyConversionButtonClicked() {
+    }
+
+    override fun onVisaInformationButtonClicked() {
+    }
+
+    // endregion
 }
