@@ -28,7 +28,7 @@
                 android:id="@+id/visaInfoReqsSearchButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_rounded_bottom_small"
+                android:background="@drawable/button_rounded_bottom_bg"
                 android:textColor="@android:color/white"
                 android:text="@string/visa_reqs_search"/>
 

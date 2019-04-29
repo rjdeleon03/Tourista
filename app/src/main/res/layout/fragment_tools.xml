@@ -3,11 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.tools.ToolsFragment">
 
-    <TextView
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:useDefaultMargins="true">
+
+        <com.pabsdl.tourista.view.toolitemview.ToolItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            app:buttonText="@string/menu_currency_conversion"
+            app:srcImage="@drawable/ic_attach_money_black_24dp"/>
+
+        <com.pabsdl.tourista.view.toolitemview.ToolItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            app:buttonText="@string/menu_visa_information"
+            app:srcImage="@drawable/ic_library_books_black_24dp"/>
+
+        <com.pabsdl.tourista.view.toolitemview.ToolItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            app:buttonText="@string/menu_visa_information"
+            app:srcImage="@drawable/ic_library_books_black_24dp"/>
+
+        <com.pabsdl.tourista.view.toolitemview.ToolItemView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            app:buttonText="@string/menu_visa_information"
+            app:srcImage="@drawable/ic_library_books_black_24dp"/>
+
+    </GridLayout>
+
 
 </FrameLayout>
