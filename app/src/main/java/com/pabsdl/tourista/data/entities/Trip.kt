@@ -29,7 +29,7 @@ data class Trip(@PrimaryKey(autoGenerate = false)
         set(value) {
             mDestinations = value
         }
-    
+
     var baseDestination: Destination?
         get() = mBaseDestination
         set(value) {
