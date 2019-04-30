@@ -12,6 +12,7 @@ data class VisaInformation(@PrimaryKey(autoGenerate = true)
                            val info: Int,
 
                            @SerializedName("Passport")
+                           @ColumnInfo(name = "src_country")
                            val srcCountry: String,
 
                            @SerializedName("Destination")

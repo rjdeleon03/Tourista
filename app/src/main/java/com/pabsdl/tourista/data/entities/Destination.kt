@@ -10,7 +10,7 @@ import androidx.room.ForeignKey.CASCADE
         childColumns = ["trip_id"],
         onDelete = CASCADE)])
 data class Destination(@PrimaryKey(autoGenerate = false)
-                       val id: String,
+                       val id: String = "",
                        val name: String,
                        val lat: Double,
                        val lng: Double,
