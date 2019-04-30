@@ -21,9 +21,18 @@ data class Trip(@PrimaryKey(autoGenerate = false)
     @Ignore
     private var mDestinations: List<Destination>? = null
 
+    @Ignore
+    private var mBaseDestination: Destination? = null
+
     var destination: List<Destination>?
         get() = mDestinations
         set(value) {
             mDestinations = value
+        }
+    
+    var baseDestination: Destination?
+        get() = mBaseDestination
+        set(value) {
+            mBaseDestination = value
         }
 }
