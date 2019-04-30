@@ -9,11 +9,9 @@ data class VisaInformation(@PrimaryKey(autoGenerate = true)
                            val id: Int = 0,
 
                            @SerializedName("Value")
-                           @ColumnInfo(name = "info")
                            val info: Int,
 
                            @SerializedName("Passport")
-                           @ColumnInfo(name = "src_country")
                            val srcCountry: String,
 
                            @SerializedName("Destination")

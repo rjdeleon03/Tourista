@@ -4,16 +4,27 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.pabsdl.tourista.data.dao.DestinationDao
+import com.pabsdl.tourista.data.dao.TripDao
 import com.pabsdl.tourista.data.dao.VisaInformationDao
+import com.pabsdl.tourista.data.entities.Destination
+import com.pabsdl.tourista.data.entities.Trip
 import com.pabsdl.tourista.data.entities.VisaInformation
 
 @Database(
-    entities = [VisaInformation::class],
+    entities = [
+        VisaInformation::class,
+        Trip::class,
+        Destination::class],
     version = 1,
     exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun visaInformationDao(): VisaInformationDao
+
+    abstract fun tripDao(): TripDao
+
+    abstract fun destinationDao(): DestinationDao
 
     companion object {
 
