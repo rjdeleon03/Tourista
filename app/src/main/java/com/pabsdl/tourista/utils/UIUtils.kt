@@ -1,6 +1,9 @@
 package com.pabsdl.tourista.utils
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.FragmentActivity
 
@@ -15,6 +18,10 @@ class UIUtils {
             val cf = activity.currentFocus
             imm!!.hideSoftInputFromWindow(cf?.windowToken, 0)
             cf?.clearFocus()
+        }
+
+        fun createPlainDialog(context: Context, view: View) : Dialog {
+            return AlertDialog.Builder(context).setView(view).create()
         }
     }
 }

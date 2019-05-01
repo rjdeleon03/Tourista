@@ -1,26 +1,37 @@
 package com.pabsdl.tourista.feature.trips
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
+import com.pabsdl.tourista.common.base.BaseMvcFragment
+import com.pabsdl.tourista.feature.dialogs.tripcreation.TripCreationFragment
 
-import com.pabsdl.tourista.R
-
-class TripsFragment : Fragment() {
+class TripsFragment :
+    BaseMvcFragment<TripsMvc, TripsMvc.Listener>(), TripsMvc.Listener {
 
     companion object {
-        fun newInstance() = TripsFragment()
+        private const val TRIP_CREATION_FRAGMENT_KEY = "TRIP_CREATION_FRAGMENT_KEY"
     }
 
     private lateinit var mViewModel: TripsViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_trips, container, false)
+    override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
+        mViewMvc = TripsMvcImpl(inflater, container)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mViewModel = ViewModelProviders.of(this).get(TripsViewModelImpl::class.java)
+    }
+
+    // region TripsMvc.Listener
+
+    override fun onAddButtonClicked() {
+        val dialog = TripCreationFragment.newInstance()
+        dialog.show(fragmentManager!!, TRIP_CREATION_FRAGMENT_KEY)
+    }
+
+    // endregion
 }

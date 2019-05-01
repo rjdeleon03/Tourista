@@ -10,39 +10,26 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 
 import com.pabsdl.tourista.R
+import com.pabsdl.tourista.common.base.BaseMvcFragment
 
-class ToolsFragment : Fragment(), ToolsMvc.Listener {
+class ToolsFragment :
+    BaseMvcFragment<ToolsMvc, ToolsMvc.Listener>(), ToolsMvc.Listener {
 
-    companion object {
-        fun newInstance() = ToolsFragment()
-    }
-
-    private lateinit var mViewMvc: ToolsMvc
     private lateinit var mViewModel: ToolsViewModel
     private lateinit var mNavController: NavController
+
+    override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
+        mViewMvc = ToolsMvcImpl(inflater, container)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(ToolsViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        mViewMvc = ToolsMvcImpl(inflater, container)
-        mViewMvc.registerListener(this)
-        return mViewMvc.rootView
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mNavController = findNavController()
-    }
-
-    override fun onDestroyView() {
-        mViewMvc.unregisterListener(this)
-        super.onDestroyView()
     }
 
     // region ToolsMvc.Listener

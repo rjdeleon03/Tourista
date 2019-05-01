@@ -36,13 +36,7 @@
             </intent-filter>
         </service>
 
-        <meta-data android:name="com.here.android.maps.appid"
-            android:value="YAG0wSw8tCbYUDLvP9yK"/>
-        <meta-data android:name="com.here.android.maps.apptoken"
-            android:value="0xrh37wvJghHlofuEu-r9w"/>
-        <meta-data android:name="com.here.android.maps.license.key"
-            android:value="Vnmu4HNUNYrOZVoKeKR8dxkpfbCLKpd/wGrbnzLN39f1KahFYqcQq4NartKOKMQhNEc0gWygO2iMV0fko/HBbW5w/fg1izW0RN3pld9E74+gaJAbSuUZR7rOnv3j1VuS6M6AjILc842/Tu8MNDiUrDPlP/zw5TR97OXcV3rE+40+x3JvJ/IygCvu3D8NelUDo+h9Kc+/xEQ+29wSuQJ/9PQ3WX9VOi0gTY0sEZ8BtCSW0+6k9gMwq92f6lnilu7aH0dTcJE3CU27nCZWvlsGWWzlb2AQ8yjmjHWhnWbq4u3As95cyr6V5XBJz+iGEYC+uzVYC9MX88PjPmsbeo3amtnfR+PARxDlQ1j7p2XfrUK5hbcz+G13Rv2X0566EepwNflu6VcnhiqMcpvqkzhI+Brt2Mi4KLpl0QHyUtz9SzN9vdy2k63ZeLnUrP8o39/xgnuRUMvnmm3vjv8DxjaTKKU4QAUt5IzBcPCqycAqnQTr1CucrZfRoVDIPNBCOQW8p9YvIrn0HKLyFCnPQCvgJSrveQ78XUtTZVN3lGgQIN4dLtHhICRHu7OVY5C3vxaHVHqShDFiArdijm7rdi8FThZylSZjkCh18TjCGOiWV8iXm8W7GQoTUbb4RPMSsd1pAt3mdfVcvIZ6bQiU4V+gOPbmXcvuCLIorrQG0bG9r3Y="/>
-
+        
     </application>
     
 </manifest>

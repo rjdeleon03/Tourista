@@ -1,4 +1,4 @@
-package com.pabsdl.tourista.feature.visacountriesdialog
+package com.pabsdl.tourista.feature.dialogs.visacountries
 
 import android.view.LayoutInflater
 import android.view.View

@@ -5,17 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.pabsdl.tourista.Constants
+import com.pabsdl.tourista.common.base.BaseMvcFragment
 
-import com.pabsdl.tourista.databinding.FragmentVisaInformationBinding
-import com.pabsdl.tourista.feature.visacountriesdialog.VisaCountriesFragment
+import com.pabsdl.tourista.feature.dialogs.visacountries.VisaCountriesFragment
 import com.pabsdl.tourista.feature.webview.WebViewActivity
-import com.pabsdl.tourista.utils.clickWithGuard
 import kotlinx.android.synthetic.main.fragment_visa_information.*
-import kotlinx.android.synthetic.main.fragment_visa_information.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -23,7 +20,8 @@ import kotlinx.android.synthetic.main.fragment_visa_information.view.*
  * create an instance of this fragment.
  *
  */
-class VisaInformationFragment : Fragment(), VisaInformationMvc.Listener {
+class VisaInformationFragment :
+    BaseMvcFragment<VisaInformationMvc, VisaInformationMvc.Listener>(), VisaInformationMvc.Listener {
 
     companion object {
 
@@ -39,27 +37,15 @@ class VisaInformationFragment : Fragment(), VisaInformationMvc.Listener {
         fun newInstance() = VisaInformationFragment()
     }
 
-    private lateinit var mViewMvc: VisaInformationMvc
     private lateinit var mViewModel: VisaInformationViewModel
+
+    override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
+        mViewMvc = VisaInformationMvcImpl(inflater, container, mViewModel, viewLifecycleOwner)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(VisaInformationViewModelImpl::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        mViewMvc = VisaInformationMvcImpl(inflater, container, mViewModel, viewLifecycleOwner)
-        mViewMvc.registerListener(this)
-        return mViewMvc.rootView
-    }
-
-    override fun onDestroyView() {
-        mViewMvc.unregisterListener(this)
-        super.onDestroyView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -1,15 +1,37 @@
-package com.pabsdl.tourista.feature.visacountriesdialog
+package com.pabsdl.tourista.feature.dialogs.visacountries
 
+import android.app.Dialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import com.pabsdl.tourista.R
+import com.pabsdl.tourista.common.base.BaseListener
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
+import com.pabsdl.tourista.common.base.ObservableViewMvcDialog
+import com.pabsdl.tourista.utils.UIUtils
 import kotlinx.android.synthetic.main.fragment_visa_countries.view.*
 
+interface VisaCountriesMvc : ObservableViewMvcDialog<VisaCountriesMvc.Listener> {
+
+    interface Listener: BaseListener {
+
+        fun onItemClicked(country: String)
+
+        fun onSearchInputChanged(input: String)
+
+    }
+
+    fun setCountryInput(country: String?)
+
+    fun setCountries(countries: List<String>)
+
+}
+
 class VisaCountriesMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
-    BaseObservableViewMvc<VisaCountriesMvc.Listener>(), VisaCountriesMvc {
+    BaseObservableViewMvc<VisaCountriesMvc.Listener>(),
+    VisaCountriesMvc {
 
     private val mInflater = inflater
     private val mAdapter = VisaCountriesAdapter(mInflater)
@@ -31,6 +53,10 @@ class VisaCountriesMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
             }
         }
         mRootView.visaCountriesSearchText.requestFocus()
+    }
+
+    override fun createDialog(context: Context, dismissAction: () -> Unit): Dialog {
+        return UIUtils.createPlainDialog(context, rootView)
     }
 
     override fun setCountryInput(country: String?) {

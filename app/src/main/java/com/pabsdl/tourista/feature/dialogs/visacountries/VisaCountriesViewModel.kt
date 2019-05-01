@@ -1,8 +1,16 @@
-package com.pabsdl.tourista.feature.visacountriesdialog
+package com.pabsdl.tourista.feature.dialogs.visacountries
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+
+interface VisaCountriesViewModel {
+
+    fun getCountries(): LiveData<List<String>>
+
+    fun searchCountries(country: String)
+
+}
 
 class VisaCountriesViewModelImpl(application: Application) :
     AndroidViewModel(application), VisaCountriesViewModel {

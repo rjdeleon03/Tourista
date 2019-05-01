@@ -1,4 +1,4 @@
-package com.pabsdl.tourista.feature.visacountriesdialog
+package com.pabsdl.tourista.feature.dialogs.visacountries
 
 import android.app.Application
 import androidx.lifecycle.LiveData

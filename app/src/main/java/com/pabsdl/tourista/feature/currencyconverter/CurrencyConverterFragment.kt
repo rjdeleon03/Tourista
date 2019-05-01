@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+import com.pabsdl.tourista.common.base.BaseMvcFragment
 import com.pabsdl.tourista.network.CurrencyRetrofitFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,8 @@ import kotlinx.coroutines.withContext
  * create an instance of this fragment.
  *
  */
-class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
+class CurrencyConverterFragment :
+    BaseMvcFragment<CurrencyConverterMvc, CurrencyConverterMvc.Listener>(), CurrencyConverterMvc.Listener {
 
     companion object {
         /**
@@ -34,27 +36,15 @@ class CurrencyConverterFragment : Fragment(), CurrencyConverterMvc.Listener {
             CurrencyConverterFragment()
     }
 
-    private lateinit var mViewMvc: CurrencyConverterMvc
+    override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
+        mViewMvc = CurrencyConverterMvcImpl(inflater, container, mViewModel, viewLifecycleOwner)
+    }
+
     private lateinit var mViewModel: CurrencyConverterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(CurrencyConverterViewModelImpl::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        mViewMvc = CurrencyConverterMvcImpl(inflater, container, mViewModel, viewLifecycleOwner)
-        mViewMvc.registerListener(this)
-        return mViewMvc.rootView
-    }
-
-    override fun onDestroyView() {
-        mViewMvc.unregisterListener(this)
-        super.onDestroyView()
     }
 
     override fun onConvertClicked() {
