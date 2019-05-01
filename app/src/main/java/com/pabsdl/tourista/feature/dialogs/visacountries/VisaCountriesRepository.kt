@@ -7,7 +7,7 @@ import com.pabsdl.tourista.data.AppDatabase
 
 class VisaCountriesRepository(application: Application) {
 
-    private val mDatabase = AppDatabase.getDatabase(application.applicationContext)
+    private val mDatabase = AppDatabase.getDatabase(application)
     private val mCountries: MediatorLiveData<List<String>> = MediatorLiveData()
 
     fun getCountries(): LiveData<List<String>> = mCountries

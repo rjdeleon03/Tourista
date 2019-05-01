@@ -10,7 +10,7 @@ import com.pabsdl.tourista.utils.MiscUtils
 
 class VisaInformationRepository(application: Application) {
 
-    private val mDatabase = AppDatabase.getDatabase(application.applicationContext)
+    private val mDatabase = AppDatabase.getDatabase(application)
     private val mVisaInfo: MediatorLiveData<VisaInfoData?> = MediatorLiveData()
 
     fun getVisaInfo(): LiveData<VisaInfoData?> = mVisaInfo

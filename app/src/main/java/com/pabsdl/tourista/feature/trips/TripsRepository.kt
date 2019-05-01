@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class TripsRepository(application: Application) {
 
-    private val mDatabase = AppDatabase.getDatabase(application.applicationContext)
+    private val mDatabase = AppDatabase.getDatabase(application)
     private val mTrips = mDatabase.tripDao().getAll()
 
     fun getTrips() = mTrips
