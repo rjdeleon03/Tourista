@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="16dp"
+    android:paddingTop="8dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     tools:context=".feature.dialogs.tripcreation.TripCreationFragment">
@@ -13,8 +13,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:clickable="true"
         android:background="?attr/selectableItemBackground">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -29,6 +27,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
+        android:id="@+id/tripCreationStartDateRow"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:paddingStart="8dp"
@@ -36,6 +35,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:focusable="true"
+        android:focusableInTouchMode="false"
         android:clickable="true"
         android:background="?attr/selectableItemBackground">
 
@@ -55,6 +55,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/tripCreationEndDateRow"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:paddingStart="8dp"

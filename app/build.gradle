@@ -69,4 +69,7 @@ dependencies {
 
     // Here Maps
     implementation(name: 'HERE-sdk', ext: 'aar')
+
+    // Joda time
+    implementation 'net.danlew:android.joda:2.10.1.2'
 }

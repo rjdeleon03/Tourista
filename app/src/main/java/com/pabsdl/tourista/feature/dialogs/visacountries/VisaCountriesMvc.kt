@@ -55,7 +55,7 @@ class VisaCountriesMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
         mRootView.visaCountriesSearchText.requestFocus()
     }
 
-    override fun createDialog(context: Context, dismissAction: () -> Unit): Dialog {
+    override fun createDialog(context: Context): Dialog {
         return UIUtils.createPlainDialog(context, rootView)
     }
 

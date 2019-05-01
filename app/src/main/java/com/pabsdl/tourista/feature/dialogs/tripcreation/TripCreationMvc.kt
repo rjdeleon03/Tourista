@@ -12,12 +12,17 @@ import com.pabsdl.tourista.R
 import com.pabsdl.tourista.common.base.BaseListener
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
 import com.pabsdl.tourista.common.base.ObservableViewMvcDialog
+import com.pabsdl.tourista.utils.clickWithGuard
+import kotlinx.android.synthetic.main.fragment_trip_creation.view.*
 
 interface TripCreationMvc : ObservableViewMvcDialog<TripCreationMvc.Listener> {
 
     interface Listener: BaseListener {
 
-        fun onAddButtonClicked()
+        fun onOkButtonClicked()
+        fun onCancelButtonClicked()
+        fun onStartDateClicked()
+        fun onEndDateClicked()
     }
 }
 
@@ -29,16 +34,28 @@ class TripCreationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
     override val rootView: View
         get() = mRootView
 
-    override fun createDialog(context: Context, dismissAction: () -> Unit): Dialog {
+    init {
+        mRootView.tripCreationStartDateRow.clickWithGuard {
+            for (listener in mListeners)
+                listener.onStartDateClicked()
+        }
+        mRootView.tripCreationEndDateRow.clickWithGuard {
+            for (listener in mListeners)
+                listener.onEndDateClicked()
+        }
+    }
+
+    override fun createDialog(context: Context): Dialog {
         return AlertDialog.Builder(context)
             .setView(rootView)
             .setTitle(R.string.title_trip_creation)
             .setPositiveButton(R.string.text_ok) { _, _ ->
-                Toast.makeText(context, "OK Clicked", Toast.LENGTH_SHORT).show()
-                dismissAction()
+                for (listener in mListeners)
+                    listener.onOkButtonClicked()
             }
             .setNegativeButton(R.string.text_cancel) { _, _ ->
-                dismissAction()
+                for (listener in mListeners)
+                    listener.onCancelButtonClicked()
             }
             .create()
     }

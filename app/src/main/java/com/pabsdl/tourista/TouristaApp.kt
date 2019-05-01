@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import net.danlew.android.joda.JodaTimeAndroid
 import java.lang.Exception
 import java.nio.charset.Charset
 
@@ -17,6 +18,7 @@ class TouristaApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        JodaTimeAndroid.init(this)
         CoroutineScope(Job() + Dispatchers.Main).
             launch(Dispatchers.IO) {
             seedData()

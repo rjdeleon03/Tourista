@@ -28,7 +28,7 @@ abstract class BaseMvcDialogFragment<MVC: ObservableViewMvcDialog<L>, L : BaseLi
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         initializeMvc(LayoutInflater.from(context!!), null)
         mViewMvc.registerListener(this as L)
-        return mViewMvc.createDialog(context!!) { dismiss() }
+        return mViewMvc.createDialog(context!!)
     }
 
     override fun onDismiss(dialog: DialogInterface) {

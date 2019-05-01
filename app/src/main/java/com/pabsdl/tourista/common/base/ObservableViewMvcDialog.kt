@@ -6,6 +6,6 @@ import android.content.Context
 interface ObservableViewMvcDialog<BL : BaseListener> :
     ObservableViewMvc<BL> {
 
-    fun createDialog(context: Context, dismissAction: () -> Unit) : Dialog
+    fun createDialog(context: Context) : Dialog
 
 }
