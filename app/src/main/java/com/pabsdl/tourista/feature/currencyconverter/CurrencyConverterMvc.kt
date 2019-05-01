@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import com.pabsdl.tourista.common.base.BaseListener
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
-import com.pabsdl.tourista.common.base.ObservableViewMvc
+import com.pabsdl.tourista.common.base.ObservableDataBindingViewMvc
 import com.pabsdl.tourista.databinding.FragmentCurrencyConverterBinding
-import java.lang.ref.WeakReference
 
-interface CurrencyConverterMvc : ObservableViewMvc<CurrencyConverterMvc.Listener> {
+interface CurrencyConverterMvc :
+    ObservableDataBindingViewMvc<CurrencyConverterMvc.Listener, CurrencyConverterViewModel> {
 
     interface Listener: BaseListener {
         fun onConvertClicked()
@@ -18,12 +18,9 @@ interface CurrencyConverterMvc : ObservableViewMvc<CurrencyConverterMvc.Listener
     }
 }
 
-class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
-                               viewModel: CurrencyConverterViewModel, lifecycleOwner: LifecycleOwner) :
+class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
     BaseObservableViewMvc<CurrencyConverterMvc.Listener>(), CurrencyConverterMvc {
 
-    private val mLifecycleOwner = WeakReference<LifecycleOwner>(lifecycleOwner)
-    private val mViewModel = viewModel
     private val mDataBinding = FragmentCurrencyConverterBinding.inflate(inflater, parent, false)
     override val mRootView = mDataBinding.root
 
@@ -31,8 +28,6 @@ class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
         get() { return mRootView }
 
     init {
-        mDataBinding.viewModel = mViewModel
-        mDataBinding.lifecycleOwner = mLifecycleOwner.get()
         mDataBinding.currencyConvertButton.setOnClickListener {
             for(listener in mListeners) {
                 listener.onConvertClicked()
@@ -43,5 +38,10 @@ class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
                 listener.onSwapCurrencyClicked()
             }
         }
+    }
+
+    override fun setupViewModel(viewModel: CurrencyConverterViewModel, lifecycleOwner: LifecycleOwner) {
+        mDataBinding.viewModel = viewModel
+        mDataBinding.lifecycleOwner = lifecycleOwner
     }
 }

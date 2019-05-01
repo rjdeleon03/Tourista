@@ -7,27 +7,21 @@ import androidx.lifecycle.LifecycleOwner
 import com.pabsdl.tourista.Constants
 import com.pabsdl.tourista.common.base.BaseListener
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
-import com.pabsdl.tourista.common.base.ObservableViewMvc
+import com.pabsdl.tourista.common.base.ObservableDataBindingViewMvc
 import com.pabsdl.tourista.databinding.FragmentVisaInformationBinding
-import java.lang.ref.WeakReference
 
-interface VisaInformationMvc : ObservableViewMvc<VisaInformationMvc.Listener>{
+interface VisaInformationMvc :
+    ObservableDataBindingViewMvc<VisaInformationMvc.Listener, VisaInformationViewModel> {
 
     interface Listener: BaseListener {
-
         fun onCountryFieldClicked(text: String, reqCode: Int)
-
         fun onSearchDetailsClicked()
     }
 }
 
-class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
-                             viewModel: VisaInformationViewModel, lifecycleOwner: LifecycleOwner
-) :
+class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
     BaseObservableViewMvc<VisaInformationMvc.Listener>(), VisaInformationMvc {
 
-    private val mLifecycleOwner = WeakReference<LifecycleOwner>(lifecycleOwner)
-    private val mViewModel = viewModel
     private val mDataBinding = FragmentVisaInformationBinding.inflate(inflater, parent, false)
     override val mRootView = mDataBinding.root
 
@@ -35,8 +29,6 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
         get() { return mRootView }
 
     init {
-        mDataBinding.viewModel = mViewModel
-        mDataBinding.lifecycleOwner = mLifecycleOwner.get()
         mDataBinding.visaPassportText.keyListener = null
         mDataBinding.visaDestinationText.keyListener = null
         mDataBinding.visaInfoResultView.reqsSearchClickAction = ::createReqsSearchClickAction
@@ -54,6 +46,11 @@ class VisaInformationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
                         Constants.VISA_COUNTRY_REQ_DESTINATION_CODE)
                 }
         }
+    }
+
+    override fun setupViewModel(viewModel: VisaInformationViewModel, lifecycleOwner: LifecycleOwner) {
+        mDataBinding.viewModel = viewModel
+        mDataBinding.lifecycleOwner = lifecycleOwner
     }
 
     private fun createReqsSearchClickAction() {

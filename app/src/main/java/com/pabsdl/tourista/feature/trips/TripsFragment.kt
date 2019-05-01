@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import com.pabsdl.tourista.R
 import com.pabsdl.tourista.common.base.BaseMvcFragment
 import com.pabsdl.tourista.data.entities.Trip
 import com.pabsdl.tourista.feature.dialogs.tripcreation.TripCreationFragment
@@ -17,14 +20,16 @@ class TripsFragment :
     }
 
     private lateinit var mViewModel: TripsViewModel
+    private lateinit var mNavController: NavController
 
     override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
         mViewMvc = TripsMvcImpl(inflater, container)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
+        mNavController = findNavController()
         mViewModel = ViewModelProviders.of(this).get(TripsViewModelImpl::class.java)
         mViewModel.getTrips().observe(this, Observer {
             mViewMvc.setTrips(it)
@@ -39,7 +44,7 @@ class TripsFragment :
     }
 
     override fun onItemClicked(trip: Trip) {
-        // TODO: Transition to Trip page
+        mNavController.navigate(R.id.action_tripsFragment_to_tripInfoFragment)
     }
 
     // endregion

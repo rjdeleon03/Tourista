@@ -6,14 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import com.pabsdl.tourista.R
 
 @Suppress("UNCHECKED_CAST")
-abstract class BaseMvcDialogFragment<MVC: ObservableViewMvcDialog<L>, L : BaseListener> :
-    DialogFragment() {
+abstract class BaseMvcDialogFragment<MVC, L : BaseListener> :
+    DialogFragment() where MVC : BaseDialog, MVC: ObservableViewMvc<L> {
 
     protected lateinit var mViewMvc: MVC
 

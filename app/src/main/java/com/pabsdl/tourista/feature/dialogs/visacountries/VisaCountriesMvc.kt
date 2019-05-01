@@ -9,11 +9,13 @@ import androidx.core.widget.doAfterTextChanged
 import com.pabsdl.tourista.R
 import com.pabsdl.tourista.common.base.BaseListener
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
-import com.pabsdl.tourista.common.base.ObservableViewMvcDialog
+import com.pabsdl.tourista.common.base.BaseDialog
+import com.pabsdl.tourista.common.base.ObservableViewMvc
 import com.pabsdl.tourista.utils.UIUtils
 import kotlinx.android.synthetic.main.fragment_visa_countries.view.*
 
-interface VisaCountriesMvc : ObservableViewMvcDialog<VisaCountriesMvc.Listener> {
+interface VisaCountriesMvc : BaseDialog,
+    ObservableViewMvc<VisaCountriesMvc.Listener> {
 
     interface Listener: BaseListener {
 

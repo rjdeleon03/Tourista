@@ -40,12 +40,13 @@ class VisaInformationFragment :
     private lateinit var mViewModel: VisaInformationViewModel
 
     override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
-        mViewMvc = VisaInformationMvcImpl(inflater, container, mViewModel, viewLifecycleOwner)
+        mViewMvc = VisaInformationMvcImpl(inflater, container)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(VisaInformationViewModelImpl::class.java)
+        mViewMvc.setupViewModel(mViewModel, viewLifecycleOwner)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

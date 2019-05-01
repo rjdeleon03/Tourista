@@ -9,7 +9,11 @@
         android:id="@+id/tripsFragment"
         android:name="com.pabsdl.tourista.feature.trips.TripsFragment"
         android:label="fragment_trips"
-        tools:layout="@layout/fragment_trips" />
+        tools:layout="@layout/fragment_trips" >
+        <action
+            android:id="@+id/action_tripsFragment_to_tripInfoFragment"
+            app:destination="@id/tripInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/currencyConverterFragment"
         android:name="com.pabsdl.tourista.feature.currencyconverter.CurrencyConverterFragment"
@@ -32,5 +36,10 @@
             android:id="@+id/action_toolsFragment_to_visaInformationFragment"
             app:destination="@id/visaInformationFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/tripInfoFragment"
+        android:name="com.pabsdl.tourista.feature.tripinfo.TripInfoFragment"
+        android:label="fragment_trip_info"
+        tools:layout="@layout/fragment_trip_info" />
 
 </navigation>

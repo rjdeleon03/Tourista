@@ -37,14 +37,15 @@ class CurrencyConverterFragment :
     }
 
     override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
-        mViewMvc = CurrencyConverterMvcImpl(inflater, container, mViewModel, viewLifecycleOwner)
+        mViewMvc = CurrencyConverterMvcImpl(inflater, container)
     }
 
     private lateinit var mViewModel: CurrencyConverterViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(CurrencyConverterViewModelImpl::class.java)
+        mViewMvc.setupViewModel(mViewModel, viewLifecycleOwner)
     }
 
     override fun onConvertClicked() {

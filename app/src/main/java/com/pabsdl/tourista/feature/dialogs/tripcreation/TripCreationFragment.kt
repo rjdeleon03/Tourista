@@ -22,15 +22,16 @@ class TripCreationFragment :
 
     private lateinit var mViewModel: TripCreationViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(TripCreationViewModelImpl::class.java)
+        mViewMvc.setupViewModel(mViewModel, viewLifecycleOwner)
     }
 
     // region BaseMvcDialogFragment
 
     override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
-        mViewMvc = TripCreationMvcImpl(inflater, container, mViewModel, this)
+        mViewMvc = TripCreationMvcImpl(inflater, container)
     }
 
     // endregion

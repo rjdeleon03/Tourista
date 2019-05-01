@@ -10,12 +10,14 @@ import androidx.lifecycle.LifecycleOwner
 import com.pabsdl.tourista.R
 import com.pabsdl.tourista.common.base.BaseListener
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
-import com.pabsdl.tourista.common.base.ObservableViewMvcDialog
+import com.pabsdl.tourista.common.base.ObservableDataBindingViewMvc
+import com.pabsdl.tourista.common.base.BaseDialog
 import com.pabsdl.tourista.databinding.FragmentTripCreationBinding
 import com.pabsdl.tourista.utils.clickWithGuard
-import java.lang.ref.WeakReference
 
-interface TripCreationMvc : ObservableViewMvcDialog<TripCreationMvc.Listener> {
+interface TripCreationMvc :
+    BaseDialog,
+    ObservableDataBindingViewMvc<TripCreationMvc.Listener, TripCreationViewModel> {
 
     interface Listener: BaseListener {
 
@@ -26,12 +28,9 @@ interface TripCreationMvc : ObservableViewMvcDialog<TripCreationMvc.Listener> {
     }
 }
 
-class TripCreationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
-                          viewModel: TripCreationViewModel, lifecycleOwner: LifecycleOwner) :
+class TripCreationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
     BaseObservableViewMvc<TripCreationMvc.Listener>(), TripCreationMvc {
 
-    private val mLifecycleOwner = WeakReference<LifecycleOwner>(lifecycleOwner)
-    private val mViewModel = viewModel
     private val mDataBinding = FragmentTripCreationBinding.inflate(inflater, parent, false)
     override val mRootView = mDataBinding.root
 
@@ -39,8 +38,6 @@ class TripCreationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
         get() = mRootView
 
     init {
-        mDataBinding.viewModel = mViewModel
-        mDataBinding.lifecycleOwner = mLifecycleOwner.get()
         mDataBinding.tripCreationStartDateRow.clickWithGuard {
             for (listener in mListeners)
                 listener.onStartDateClicked()
@@ -64,6 +61,11 @@ class TripCreationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
                     listener.onCancelButtonClicked()
             }
             .create()
+    }
+
+    override fun setupViewModel(viewModel: TripCreationViewModel, lifecycleOwner: LifecycleOwner) {
+        mDataBinding.viewModel = viewModel
+        mDataBinding.lifecycleOwner = lifecycleOwner
     }
 
 }
