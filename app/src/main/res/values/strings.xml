@@ -38,4 +38,5 @@
     <string name="template_date">Date</string>
     <string name="trip_creation_end_date">To:</string>
     <string name="title_trip_creation">Create Trip</string>
+    <string name="menu_finder">Finder</string>
 </resources>
