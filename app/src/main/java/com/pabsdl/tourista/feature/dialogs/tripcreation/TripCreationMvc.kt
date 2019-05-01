@@ -32,6 +32,7 @@ class TripCreationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
     override fun createDialog(context: Context, dismissAction: () -> Unit): Dialog {
         return AlertDialog.Builder(context)
             .setView(rootView)
+            .setTitle(R.string.title_trip_creation)
             .setPositiveButton(R.string.text_ok) { _, _ ->
                 Toast.makeText(context, "OK Clicked", Toast.LENGTH_SHORT).show()
                 dismissAction()

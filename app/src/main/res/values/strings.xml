@@ -33,4 +33,9 @@
     <string name="title_tools">Tools</string>
     <string name="text_ok">OK</string>
     <string name="text_cancel">Cancel</string>
+    <string name="trip_creation_name">Where are you going?</string>
+    <string name="trip_creation_start_date">From:</string>
+    <string name="template_date">Date</string>
+    <string name="trip_creation_end_date">To:</string>
+    <string name="title_trip_creation">Create Trip</string>
 </resources>
