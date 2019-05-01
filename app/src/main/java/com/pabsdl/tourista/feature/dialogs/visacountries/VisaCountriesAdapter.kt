@@ -1,34 +1,34 @@
 package com.pabsdl.tourista.feature.dialogs.visacountries
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.pabsdl.tourista.R
-import kotlinx.android.synthetic.main.item_visa_country_result.view.*
 
-class VisaCountriesAdapter(inflater: LayoutInflater) :
-    RecyclerView.Adapter<VisaCountriesAdapter.ViewHolder>() {
+class VisaCountriesAdapter(inflater: LayoutInflater,
+                           clickHandler: ((String) -> Unit)? = null) :
+    RecyclerView.Adapter<VisaCountriesAdapter.ViewHolder>(), VisaCountriesItemMvc.Listener {
 
     private val mInflater = inflater
+    private val mClickHandler: ((String) -> Unit)? = clickHandler
     private var mCountries: List<String>? = null
-    private var mClickHandler: ((String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = mInflater.inflate(R.layout.item_visa_country_result, parent, false)
-        return ViewHolder(view)
+        val viewMvc = VisaCountriesItemMvcImpl(mInflater, parent)
+        viewMvc.registerListener(this)
+        return ViewHolder(viewMvc)
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount( ): Int {
         if (mCountries == null) return 0
         return mCountries!!.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.getTextView().text = mCountries?.get(position)
-        holder.setOnClickListener(View.OnClickListener {
-            mClickHandler?.invoke(holder.getTextView().text.toString())
-        })
+        holder.viewMvc.bindCountry(mCountries!![position])
+    }
+
+    override fun onItemClicked(country: String) {
+        mClickHandler?.invoke(country)
     }
 
     fun setCountries(countries: List<String>) {
@@ -36,18 +36,12 @@ class VisaCountriesAdapter(inflater: LayoutInflater) :
         notifyDataSetChanged()
     }
 
-    fun setClickHandler(handler: (String) -> Unit) {
-        mClickHandler = handler
-    }
+    class ViewHolder(viewMvc: VisaCountriesItemMvc) :
+        RecyclerView.ViewHolder(viewMvc.rootView) {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val mViewMvc = viewMvc
 
-        private val mView = view
-
-        fun getTextView() = mView.visaCountryResultText!!
-
-        fun setOnClickListener(listener: View.OnClickListener) {
-            mView.setOnClickListener(listener)
-        }
+        val viewMvc: VisaCountriesItemMvc
+            get() = mViewMvc
     }
 }

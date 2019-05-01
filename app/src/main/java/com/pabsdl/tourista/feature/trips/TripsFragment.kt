@@ -3,8 +3,10 @@ package com.pabsdl.tourista.feature.trips
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.pabsdl.tourista.common.base.BaseMvcFragment
+import com.pabsdl.tourista.data.entities.Trip
 import com.pabsdl.tourista.feature.dialogs.tripcreation.TripCreationFragment
 
 class TripsFragment :
@@ -24,6 +26,9 @@ class TripsFragment :
         super.onCreate(savedInstanceState)
 
         mViewModel = ViewModelProviders.of(this).get(TripsViewModelImpl::class.java)
+        mViewModel.getTrips().observe(this, Observer {
+            mViewMvc.setTrips(it)
+        })
     }
 
     // region TripsMvc.Listener
@@ -31,6 +36,10 @@ class TripsFragment :
     override fun onAddButtonClicked() {
         val dialog = TripCreationFragment.newInstance()
         dialog.show(fragmentManager!!, TRIP_CREATION_FRAGMENT_KEY)
+    }
+
+    override fun onItemClicked(trip: Trip) {
+        // TODO: Transition to Trip page
     }
 
     // endregion

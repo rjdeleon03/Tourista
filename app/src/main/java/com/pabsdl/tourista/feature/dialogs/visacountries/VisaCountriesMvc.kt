@@ -34,18 +34,16 @@ class VisaCountriesMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
     VisaCountriesMvc {
 
     private val mInflater = inflater
-    private val mAdapter = VisaCountriesAdapter(mInflater)
+    private val mAdapter = VisaCountriesAdapter(mInflater) {
+        for (listener in mListeners)
+            listener.onItemClicked(it)
+    }
     override val mRootView = inflater.inflate(R.layout.fragment_visa_countries, parent, false)!!
 
     override val rootView: View
         get() { return mRootView }
 
     init {
-        mAdapter.setClickHandler {
-            for (listener in mListeners) {
-                listener.onItemClicked(it)
-            }
-        }
         mRootView.visaCountriesRecyclerView.adapter = mAdapter
         mRootView.visaCountriesSearchText.doAfterTextChanged {
             for (listener in mListeners) {
