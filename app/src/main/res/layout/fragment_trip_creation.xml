@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="8dp"
+    android:paddingTop="16dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     tools:context=".feature.dialogs.tripcreation.TripCreationFragment">
@@ -13,12 +13,17 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+        android:focusable="true"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tripCreationNameText"
+            style="@style/NoBlankEditTextTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:hint="@string/trip_creation_name"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -26,8 +31,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,8 +57,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:layout_width="wrap_content"
