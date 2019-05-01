@@ -3,17 +3,17 @@ package com.pabsdl.tourista.feature.dialogs.tripcreation
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
 import com.pabsdl.tourista.R
 import com.pabsdl.tourista.common.base.BaseListener
 import com.pabsdl.tourista.common.base.BaseObservableViewMvc
 import com.pabsdl.tourista.common.base.ObservableViewMvcDialog
+import com.pabsdl.tourista.databinding.FragmentTripCreationBinding
 import com.pabsdl.tourista.utils.clickWithGuard
-import kotlinx.android.synthetic.main.fragment_trip_creation.view.*
+import java.lang.ref.WeakReference
 
 interface TripCreationMvc : ObservableViewMvcDialog<TripCreationMvc.Listener> {
 
@@ -26,20 +26,26 @@ interface TripCreationMvc : ObservableViewMvcDialog<TripCreationMvc.Listener> {
     }
 }
 
-class TripCreationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
+class TripCreationMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
+                          viewModel: TripCreationViewModel, lifecycleOwner: LifecycleOwner) :
     BaseObservableViewMvc<TripCreationMvc.Listener>(), TripCreationMvc {
 
-    override val mRootView = inflater.inflate(R.layout.fragment_trip_creation, parent, false)!!
+    private val mLifecycleOwner = WeakReference<LifecycleOwner>(lifecycleOwner)
+    private val mViewModel = viewModel
+    private val mDataBinding = FragmentTripCreationBinding.inflate(inflater, parent, false)
+    override val mRootView = mDataBinding.root
 
     override val rootView: View
         get() = mRootView
 
     init {
-        mRootView.tripCreationStartDateRow.clickWithGuard {
+        mDataBinding.viewModel = mViewModel
+        mDataBinding.lifecycleOwner = mLifecycleOwner.get()
+        mDataBinding.tripCreationStartDateRow.clickWithGuard {
             for (listener in mListeners)
                 listener.onStartDateClicked()
         }
-        mRootView.tripCreationEndDateRow.clickWithGuard {
+        mDataBinding.tripCreationEndDateRow.clickWithGuard {
             for (listener in mListeners)
                 listener.onEndDateClicked()
         }

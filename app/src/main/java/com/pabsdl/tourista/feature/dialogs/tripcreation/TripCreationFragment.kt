@@ -24,25 +24,13 @@ class TripCreationFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this).get(TripCreationViewModel::class.java)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        mViewModel.getTrip().observe(viewLifecycleOwner, Observer {
-            val startDate = LocalDate(it.bindableStartDate)
-            tripCreationStartDateText.text = "${startDate.year}/${startDate.monthOfYear}/${startDate.dayOfMonth}"
-
-            val endDate = LocalDate(it.bindableEndDate)
-            tripCreationEndDateText.text = "${endDate.year}/${endDate.monthOfYear}/${endDate.dayOfMonth}"
-        })
+        mViewModel = ViewModelProviders.of(this).get(TripCreationViewModelImpl::class.java)
     }
 
     // region BaseMvcDialogFragment
 
     override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
-        mViewMvc = TripCreationMvcImpl(inflater, container)
+        mViewMvc = TripCreationMvcImpl(inflater, container, mViewModel, this)
     }
 
     // endregion
@@ -50,6 +38,7 @@ class TripCreationFragment :
     // region TripCreationMvc.Listener
 
     override fun onOkButtonClicked() {
+        mViewModel.saveTrip()
         dismiss()
     }
 

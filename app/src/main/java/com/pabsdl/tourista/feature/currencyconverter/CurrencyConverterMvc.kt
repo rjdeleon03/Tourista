@@ -38,7 +38,6 @@ class CurrencyConverterMvcImpl(inflater: LayoutInflater, parent: ViewGroup?,
                 listener.onConvertClicked()
             }
         }
-
         mDataBinding.currencySwapButton.setOnClickListener {
             for(listener in mListeners) {
                 listener.onSwapCurrencyClicked()

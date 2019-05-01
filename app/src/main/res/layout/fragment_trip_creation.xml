@@ -1,84 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="8dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    tools:context=".feature.dialogs.tripcreation.TripCreationFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.pabsdl.tourista.feature.dialogs.tripcreation.TripCreationViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/tripCreationLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        tools:context=".feature.dialogs.tripcreation.TripCreationFragment">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tripCreationNameText"
-            style="@style/NoBlankEditTextTheme"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:hint="@string/trip_creation_name"/>
+            android:background="?attr/selectableItemBackground">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tripCreationNameText"
+                style="@style/NoBlankEditTextTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:hint="@string/trip_creation_name"
+                android:text="@={viewModel.trip.bindableName}"/>
 
-    <RelativeLayout
-        android:id="@+id/tripCreationStartDateRow"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:focusable="true"
-        android:focusableInTouchMode="false"
-        android:clickable="true"
-        android:background="?attr/selectableItemBackground">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/trip_creation_start_date"/>
+        <RelativeLayout
+            android:id="@+id/tripCreationStartDateRow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tripCreationStartDateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/template_date"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/trip_creation_start_date" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tripCreationStartDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:dateText="@{viewModel.trip.bindableStartDate}"/>
 
-    <RelativeLayout
-        android:id="@+id/tripCreationEndDateRow"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:focusable="true"
-        android:clickable="true"
-        android:background="?attr/selectableItemBackground">
+        </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="@string/trip_creation_end_date"/>
+        <RelativeLayout
+            android:id="@+id/tripCreationEndDateRow"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tripCreationEndDateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/template_date"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/trip_creation_end_date" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tripCreationEndDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:dateText="@{viewModel.trip.bindableEndDate}" />
 
-</LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
