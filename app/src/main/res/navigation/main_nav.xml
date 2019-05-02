@@ -45,6 +45,6 @@
         android:id="@+id/finderFragment"
         android:name="com.pabsdl.tourista.feature.finder.FinderFragment"
         android:label="finder_fragment"
-        tools:layout="@layout/finder_fragment" />
+        tools:layout="@layout/fragment_finder" />
 
 </navigation>

@@ -2,21 +2,20 @@ package com.pabsdl.tourista.feature.finder
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.here.android.mpa.common.MapSettings
 import com.here.android.mpa.common.OnEngineInitListener
 import com.here.android.mpa.mapping.SupportMapFragment
 
 import com.pabsdl.tourista.R
-import kotlinx.android.synthetic.main.finder_fragment.*
+import com.pabsdl.tourista.common.base.BaseMvcFragment
+import kotlinx.android.synthetic.main.fragment_finder.*
 import java.io.File
 
-class FinderFragment : Fragment() {
+class FinderFragment :
+    BaseMvcFragment<FinderViewMvc, FinderViewMvc.Listener>(), FinderViewMvc.Listener {
 
     companion object {
         fun newInstance() = FinderFragment()
@@ -24,11 +23,8 @@ class FinderFragment : Fragment() {
 
     private lateinit var mViewModel: FinderViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.finder_fragment, container, false)
+    override fun initializeMvc(inflater: LayoutInflater, container: ViewGroup?) {
+        mViewMvc = FinderViewMvcImpl(inflater, container)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
