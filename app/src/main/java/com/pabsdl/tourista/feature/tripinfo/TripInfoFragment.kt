@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.here.android.mpa.common.MapSettings
+import com.here.android.mpa.common.OnEngineInitListener
+import com.here.android.mpa.mapping.SupportMapFragment
 
 import com.pabsdl.tourista.R
+import java.io.File
 
 class TripInfoFragment : Fragment() {
 
