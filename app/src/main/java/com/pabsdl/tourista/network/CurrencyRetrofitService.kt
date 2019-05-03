@@ -1,6 +1,5 @@
 package com.pabsdl.tourista.network
 
-import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import kotlinx.coroutines.Deferred
 import retrofit2.Response

@@ -6,6 +6,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.FragmentActivity
+import com.google.android.material.snackbar.Snackbar
 
 class UIUtils {
 
@@ -20,8 +21,14 @@ class UIUtils {
             cf?.clearFocus()
         }
 
+        /* Creates a simple dialog with no option buttons */
         fun createPlainDialog(context: Context, view: View) : Dialog {
             return AlertDialog.Builder(context).setView(view).create()
+        }
+
+        /* Creates a snackbar and displays it */
+        fun createAndShowSnackbar(view: View, textId: Int) {
+            Snackbar.make(view, textId, Snackbar.LENGTH_LONG).show()
         }
     }
 }
