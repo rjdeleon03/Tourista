@@ -50,6 +50,7 @@ class FinderFragment :
             override fun onPositionUpdated(p0: PositioningManager.LocationMethod?,
                                            p1: GeoPosition?, p2: Boolean) {
                 mMap?.setCenter(p1!!.coordinate, Map.Animation.LINEAR)
+                mViewModel.getRestaurants(p1!!.coordinate)
                 mPosManager?.removeListener(mPosListener)
             }
         }
@@ -77,19 +78,8 @@ class FinderFragment :
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val application = activity!!.application
-        val locationManager = activity!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val factory = FinderViewModelFactory(application, locationManager)
-        mViewModel = ViewModelProviders.of(this, factory).get(FinderViewModel::class.java)
+        mViewModel = ViewModelProviders.of(this).get(FinderViewModel::class.java)
         setupMap()
-    }
-
-    private fun setupLocationRetriever() {
-        mViewModel.currentLocation.observe(viewLifecycleOwner, Observer {
-            // TODO: Mark location on map
-            val loc = it
-        })
-        mViewModel.requestLocation()
     }
 
     private fun setupMap() {

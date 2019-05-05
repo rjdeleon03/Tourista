@@ -3,8 +3,7 @@ package com.pabsdl.tourista.feature.finder
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.here.android.mpa.common.GeoCoordinate
-import com.here.android.mpa.search.ErrorCode
-import com.here.android.mpa.search.SearchRequest
+import com.here.android.mpa.search.*
 
 class FinderViewModel(application: Application) :
     AndroidViewModel(application) {
@@ -13,8 +12,13 @@ class FinderViewModel(application: Application) :
     fun getRestaurants(center: GeoCoordinate) {
         try {
 
-            val request = SearchRequest("restaurant").setSearchCenter(center)
-            request.collectionSize = 10
+            val request = AroundRequest()
+            request.setSearchCenter(center)
+
+            val filter = CategoryFilter()
+            filter.add(Category.Global.EAT_DRINK)
+            request.setCategoryFilter(filter)
+//            request.setSearchArea(GeoBoundingBox(center, 100f, 100f))
 
             val error = request.execute { data, err ->
                 if (err != ErrorCode.NONE) {

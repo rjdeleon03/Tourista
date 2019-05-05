@@ -13,6 +13,6 @@ class FinderViewModelFactory(application: Application, locationManager: Location
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return (FinderViewModel(mApplication, mLocationManager) as T)
+        return (FinderViewModel(mApplication) as T)
     }
 }
