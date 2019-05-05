@@ -50,6 +50,7 @@ class FinderFragment :
             override fun onPositionUpdated(p0: PositioningManager.LocationMethod?,
                                            p1: GeoPosition?, p2: Boolean) {
                 mMap?.setCenter(p1!!.coordinate, Map.Animation.LINEAR)
+                mPosManager?.removeListener(mPosListener)
             }
         }
     }
